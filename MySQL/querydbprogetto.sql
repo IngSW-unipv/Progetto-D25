@@ -207,6 +207,3 @@ CREATE TABLE FEEDBACK
           accomodation INT,
           transportation INT,
           comments TEXT(100));
-
-
-          
