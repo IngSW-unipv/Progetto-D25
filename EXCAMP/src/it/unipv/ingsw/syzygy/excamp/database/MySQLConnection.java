@@ -5,25 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLConnection {
-	public static void main(String[] args) {
-	       // MySQL database URL
-	       String url = "jdbc:mysql://localhost:3306/testdb";  // Replace with your DB 
-	       String user = "root";  // Replace with your MySQL username
-	       String password = "password";  // Replace with your MySQL password
-	       try {
-	    	   // Carica il driver
-	           Class.forName("com.mysql.cj.jdbc.Driver");
+    // Rendi la variabile 'url' statica
+    private static String url = "jdbc:mysql://localhost:3306/testdb?serverTimezone=Europe/Rome";
+    private static final String USER = "root";
+    private static final String PASSWORD = "password";
 
-	           // Establishing the connection
-	           Connection connection = DriverManager.getConnection(url, user, password);
-	           if (connection != null) {
-	               System.out.println("Connected to the database successfully!");
-	           }
-	       } catch (SQLException e) {
-	           System.out.println("Connection failed!");
-	           e.printStackTrace();
-	       } catch (ClassNotFoundException e) {
-	    	   e.printStackTrace();
-		}
-	   }
+    public static Connection getConnection() throws SQLException {
+        try {
+            // Carica il driver JDBC di MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Ora puoi usare 'url' direttamente
+            return DriverManager.getConnection(url, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("MySQL JDBC Driver not found", e);
+        }
+    }
 }
+
