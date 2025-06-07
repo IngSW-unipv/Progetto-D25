@@ -20,7 +20,6 @@ public class UpperBar extends JPanel{
    private JButton contattiSegreteriaButton;
    private JButton feedbackButton;
    private JButton organizzazioneButton;
-   private JButton chatButton;
    private JButton bachecaButton;
    // costruttore privato per singleton
    private UpperBar() {
@@ -62,11 +61,6 @@ public class UpperBar extends JPanel{
        organizzazioneButton.setBackground(new Color(213, 0, 109));
        ImageIcon organizzazioneIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/organizzazione.png"));
        organizzazioneButton.setIcon(new ImageIcon(organizzazioneIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
-       // Pulsante chat
-       chatButton = new JButton();
-       chatButton.setBackground(new Color(213, 0, 109));
-       ImageIcon chatIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/chat.png"));
-       chatButton.setIcon(new ImageIcon(chatIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
        // Pulsante bacheca
        bachecaButton = new JButton();
        bachecaButton.setBackground(new Color(213, 0, 109));
@@ -82,7 +76,6 @@ public class UpperBar extends JPanel{
        add(organizzazioneButton);
        add(bachecaButton);
        add(feedbackButton);
-       add(chatButton);
        add(contattiSegreteriaButton);
        add(profileButton);
 
@@ -121,9 +114,6 @@ public class UpperBar extends JPanel{
    public JButton getOrganizzazioneButton() {
        return organizzazioneButton;
    }
-   public JButton getChatButton() {
-       return chatButton;
-   }
    public JButton getBachecaButton() {
        return bachecaButton;
    }
@@ -133,7 +123,6 @@ public class UpperBar extends JPanel{
        contattiSegreteriaButton.setVisible(true);
        feedbackButton.setVisible(true);
        organizzazioneButton.setVisible(false);
-       chatButton.setVisible(false);
        bachecaButton.setVisible(false);
    }
    // Impostazioni per l'utente
@@ -142,7 +131,6 @@ public class UpperBar extends JPanel{
        contattiSegreteriaButton.setVisible(true);
        feedbackButton.setVisible(true);
        organizzazioneButton.setVisible(true);
-       chatButton.setVisible(false);
        bachecaButton.setVisible(true);
    }
    // Impostazioni per lo staff
@@ -151,7 +139,6 @@ public class UpperBar extends JPanel{
        contattiSegreteriaButton.setVisible(true);
        feedbackButton.setVisible(true);
        organizzazioneButton.setVisible(true);
-       chatButton.setVisible(true);
        bachecaButton.setVisible(true);
    }
    // Impostazioni per l'amministratore
@@ -160,7 +147,6 @@ public class UpperBar extends JPanel{
        contattiSegreteriaButton.setVisible(true);
        feedbackButton.setVisible(true);
        organizzazioneButton.setVisible(true);
-       chatButton.setVisible(false);
        bachecaButton.setVisible(true);
    }
    // Funzione per mostrare i contatti segreteria
