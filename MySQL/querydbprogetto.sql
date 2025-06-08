@@ -1,209 +1,241 @@
--- CREATE DATABASE testdb
+-- CREATE DATABASE testdb;
 use testdb;
+
 drop table if exists AMMINISTRATORE;
-drop table if exists PROFILO; 
-drop table if exists PROGRAMMA; 
-drop table if exists MENUST;
-drop table if exists ALLOGGIOST;
-drop table if exists TRASPORTIST;
 drop table if exists STAFF;
 
-CREATE TABLE AMMINISTRATORE
-        (passwordAD VARCHAR(15),
-          username VARCHAR(20),
-          location VARCHAR(15),
-          PRIMARY KEY (passwordAD, location));
-
-CREATE TABLE STAFF
-        ( usernameST VARCHAR(20),
-          passwordST VARCHAR(15),
-          nameST VARCHAR(15),
-		  surnameST VARCHAR(20),
-          ageST int,
-          CFST CHAR(16),
-          accomodationST VARCHAR(20),
-          residenceST VARCHAR(20),
-          transporationST VARCHAR(20),
-          allergiesST TEXT(100),
-          medicalIssuesST TEXT(100),
-          phonenumberST INT,
-          PRIMARY KEY (usernameST, CFST));          
-
-drop table if exists ISCRIZIONE;
-drop table if exists ALLOGGIOPA;
-drop table if exists MENUPA;
-drop table if exists TRASPORTIPA; 
 drop table if exists UTENTE;
+drop table if exists ALLOGGIOST;
+drop table if exists ALLOGGIOPA;
+drop table if exists ISCRIZIONE;
 
-CREATE TABLE UTENTE
-        ( usernameUT VARCHAR(20),
-          passwordUT VARCHAR(15),
-          nameGE VARCHAR(15),
-          surnameGE VARCHAR(20),
-          namePA VARCHAR(15),
-          surnamePA VARCHAR(20),
-          agePA INTEGER,
-          CFPA CHAR(16),
-          accomodationPA VARCHAR(20),
-          residencePA VARCHAR(20),
-          transporationPA VARCHAR(20),
-          allergiesPA TEXT(100),
-          medicalIssuesPA TEXT(100),
-          sensitiveInfoPA TEXT(100),
-          parentsInfoPA INT,
-          PRIMARY KEY (usernameUT, passwordUT, CFPA));
- 
+drop table if exists TRASPORTI;
+drop table if exists programma_giornaliero;
+drop table if exists programma_alternativo;
+drop table if exists PROFILO;  
+drop table if exists PERSONA;
 
- CREATE TABLE ISCRIZIONE
-        ( usernameIS VARCHAR(20),
-          passwordIS VARCHAR(15),
-          nameGE VARCHAR(15),
-		  surnameGE VARCHAR(20),
-          email VARCHAR(30),
-          parentsInfoPA INT,
-		  namePA VARCHAR(15),
-          surnamePA VARCHAR(20),
-          agePA INTEGER,
-		  CFPA CHAR(16) PRIMARY KEY,
-          genderPA VARCHAR(8),
-          accomodationPA VARCHAR(20),
-          paese VARCHAR(20),
-          indirizzo VARCHAR(50),
-          civico VARCHAR(5),
-          CAP INT,
-          provincia VARCHAR(20),
-          località VARCHAR(20),
-          dateOfBirthPA date,
-          placeOfBirthPA VARCHAR(20),
-          particiaptionWeek date, 
-          transporationPA VARCHAR(20),
-          allergiesPA TEXT(100),
-          medicalIssuesPA TEXT(100),
-          sensitiveInfoPA TEXT(100),
-          camp VARCHAR(20),
-          notes TEXT(100),
-          FOREIGN KEY (usernameIS, passwordIS, CFPA)
-			REFERENCES UTENTE(usernameUT, passwordUT, CFPA) );  
-            
-drop table if exists PROFILO;         
-CREATE TABLE PROFILO
-        ( usernameST VARCHAR(20),
-          nameST VARCHAR(15),
-		  surnameST VARCHAR(20),
-          CFST CHAR(16),
-		  phonenumberST INT,
-          ageST INT,
-          camp VARCHAR(20),
-          accomodationST VARCHAR(20),
-          residenceST VARCHAR(20),
-          transporationST VARCHAR(20),
-          allergiesST TEXT(100),
-          medicalIssuesST TEXT(100),
-          campExp TEXT(100),
-          FOREIGN KEY (usernameST, CFST)
-			REFERENCES STAFF(usernameST, CFST) ); 
- 
-CREATE TABLE PROGRAMMA
-         (datePR DATE,
-          timePR TIME,
-          location VARCHAR(15),
-          groupPR VARCHAR(5),
-          userINST VARCHAR(20),
-          CFINST CHAR (16),
-          FOREIGN KEY (userINST, CFINST) REFERENCES STAFF(usernameST, CFST));
+CREATE TABLE if not exists PERSONA (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
 
- drop table if exists ALLOGGIOPA;
-CREATE TABLE ALLOGGIOPA
-         (CFPA CHAR(16),
-          usernameAL VARCHAR(20),
-          passwordAL VARCHAR(15),
-          nameAL VARCHAR(15),
-          surnameAL VARCHAR(20),
-          location VARCHAR(15),
-          camp VARCHAR(15),
-          hotel VARCHAR(16),
-          PRIMARY KEY (CFPA),
-          FOREIGN KEY (usernameAL, passwordAL, CFPA)
-			REFERENCES UTENTE(usernameUT, passwordUT,CFPA));
+CREATE TABLE if not exists AMMINISTRATORE (
+    persona_id INT PRIMARY KEY,
+    location VARCHAR(255) NOT NULL,
+    FOREIGN KEY (persona_id) REFERENCES PERSONA(id)
+);
 
-CREATE TABLE ALLOGGIOST
-         (CFST CHAR(16) PRIMARY KEY,
-          usernameST VARCHAR(20),
-          nameAL VARCHAR(15),
-          surnameAL VARCHAR(20),
-          location VARCHAR(15),
-          camp VARCHAR(15),
-          hotel VARCHAR(16),
-          room INT,
-          FOREIGN KEY (usernameST, CFST)
-			REFERENCES STAFF(usernameST, CFST));
-  
-CREATE TABLE TRASPORTIPA
-         (CFPA CHAR(16),
-          usernamePA VARCHAR(20),
-          passwordPA VARCHAR(15),
-          dateTR DATE,
-          timeTR TIME,
-          namePA VARCHAR(15),
-          surnamePA VARCHAR(20),
-          placeOfDeparture VARCHAR(15),
-          destination VARCHAR(16),
-          ETA TIME,
-          FOREIGN KEY (usernamePA, passwordPA, CFPA)
-			REFERENCES UTENTE(usernameUT, passwordUT, CFPA));
-            
-CREATE TABLE TRASPORTIST
-         (CFST CHAR(16) PRIMARY KEY,
-          usernameST VARCHAR(20),
-          dateTR DATE,
-          timeTR TIME,
-          nameST VARCHAR(15),
-          surnameST VARCHAR(20),
-          placeOfDeparture VARCHAR(15),
-          destination VARCHAR(16),
-          ETA TIME,
-          FOREIGN KEY (usernameST, CFST)
-			REFERENCES STAFF(usernameST, CFST));
+CREATE TABLE if not exists STAFF (
+    persona_id INT,
+	CFST VARCHAR(16),
+    nameST VARCHAR(255) NOT NULL,
+    surnameST VARCHAR(255) NOT NULL,
+    ageST INT NOT NULL, CHECK (AgeST>=18),
+    accommodationST VARCHAR(255),
+    residenceST VARCHAR(255),
+    placeOfDeparture VARCHAR(255),
+	destination VARCHAR(255),
+	idTR VARCHAR(255),
+    transportationST VARCHAR(255),
+    allergiesST TEXT ,
+    medicalIssuesST TEXT,
+    phonenumberST VARCHAR(255) NOT NULL,
+    camp VARCHAR(255),
+    PRIMARY KEY (persona_id, CFST ),
+    FOREIGN KEY (persona_id) REFERENCES PERSONA(id)
+);         
 
-drop table if exists LISTAAUTISTI; 
-CREATE TABLE LISTAAUTISTI
-        ( nameAU VARCHAR(15),
-          surnameAU VARCHAR(20),
-          phoneNumberAU INT PRIMARY KEY,
-          location VARCHAR(13));
+CREATE TABLE if not exists ISCRIZIONE (
+    usernameIS VARCHAR(255) UNIQUE NOT NULL,
+    passwordIS VARCHAR(255) NOT NULL,
+    nameGE VARCHAR(255) NOT NULL,
+    surnameGE VARCHAR(255) NOT NULL,
+    parentsInfoPA VARCHAR(255) NOT NULL,
+    namePA VARCHAR(255) NOT NULL,
+    surnamePA VARCHAR(255) NOT NULL,
+    agePA INT NOT NULL, CHECK (AgePA<18),
+    CFPA CHAR(16) PRIMARY KEY,
+    genderPA VARCHAR(255),
+    paese VARCHAR(255),
+    indirizzo VARCHAR(255),
+    civico VARCHAR(255),
+    CAP INT,
+    provincia VARCHAR(255),
+    località VARCHAR(255),
+    dateOfBirthPA DATE,
+    placeOfBirthPA VARCHAR(255),
+    participationWeek DATE NOT NULL, 
+    transportationPA VARCHAR(255) NOT NULL,
+    allergiesPA TEXT,
+    medicalIssuesPA TEXT,
+    sensitiveInfoPA TEXT,
+    camp VARCHAR(255),
+    notes TEXT,
+    accettatoRegolamento boolean,
+    accettatoConditions boolean,
+    accettatoPrivacy boolean
+);
 
-CREATE TABLE MENUPA
-         (CFPA CHAR(16) PRIMARY KEY,
-          usernamePA VARCHAR(20),
-          passwordPA VARCHAR(15),
-          datamenu date,
-          primo VARCHAR(25),
-          secondo VARCHAR(25),
-          FOREIGN KEY (usernamePA, passwordPA, CFPA)
-			REFERENCES UTENTE(usernameUT, passwordUT, CFPA));      
 
-CREATE TABLE MENUST
-         (CFST CHAR(16) PRIMARY KEY,
-          usernameST VARCHAR(20),
-          datamenu date,
-          primo VARCHAR(25),
-          secondo VARCHAR(25),
-          FOREIGN KEY (usernameST, CFST)
-			REFERENCES STAFF(usernameST, CFST));
+CREATE TABLE if not exists UTENTE (
+    persona_id INT,
+    namePA VARCHAR(255) NOT NULL,
+    surnamePA VARCHAR(255) NOT NULL,
+    agePA INT NOT NULL, CHECK (AgePA<18),
+    CFPA CHAR(16),
+    accomodationPA VARCHAR(255),
+	placeOfDeparture VARCHAR(255),
+	destination VARCHAR(255),
+	idTR VARCHAR(255),
+    transportationPA VARCHAR(255),
+    allergiesPA TEXT,
+    medicalIssuesPA TEXT,
+    sensitiveInfoPA TEXT,
+    parentsInfoPA VARCHAR(255) NOT NULL,
+	camp VARCHAR(255),
+    PRIMARY KEY (persona_id, CFPA),
+    FOREIGN KEY (persona_id) REFERENCES PERSONA(id),  -- Relazione con PERSONA per username e password
+    FOREIGN KEY (CFPA) REFERENCES ISCRIZIONE(CFPA)  -- Relazione con ISCRIZIONE per ottenere i dati
+);
+
+
+-- drop table if exists TRASPORTI; 
+CREATE TABLE if not exists TRASPORTI
+	 (idTR  VARCHAR(255) PRIMARY KEY,  
+	  dateTR DATE,
+	  timeTR TIME,
+	  placeOfDeparture VARCHAR(255),
+	  modalitaTR VARCHAR(255),
+	  ETA TIME,
+	  persona_id INT,
+      destination VARCHAR(255), 
+	  FOREIGN KEY (persona_id) REFERENCES PERSONA(id)
+   -- CFPA CHAR(16),
+   -- CFST CHAR(16),
+   -- FOREIGN KEY (CFPA) REFERENCES ISCRIZIONE(CFPA),
+   -- FOREIGN KEY (CFST) REFERENCES STAFF(CFST)
+);
+
+-- drop table if exists ALLOGGIOPA;
+CREATE TABLE if not exists ALLOGGIOPA (
+	id_alloggio INT AUTO_INCREMENT PRIMARY KEY,
+	location VARCHAR(255),
+	camp VARCHAR(255),
+	hotel VARCHAR(255),
+	room INT,
+	CFPA CHAR(16),
+ 	persona_id INT,
+ 	FOREIGN KEY (persona_id) REFERENCES PERSONA(id),
+    FOREIGN KEY (CFPA) REFERENCES ISCRIZIONE(CFPA)
+);
+
+-- drop table if exists ALLOGGIOST;
+CREATE TABLE if not exists ALLOGGIOST (
+	id_alloggio INT AUTO_INCREMENT PRIMARY KEY,
+	location VARCHAR(255),
+	camp VARCHAR(255),
+	hotel VARCHAR(255),
+	room INT,
+-- 	CFST CHAR(16),
+ 	persona_id INT,
+ 	FOREIGN KEY (persona_id) REFERENCES PERSONA(id)	
+-- 	FOREIGN KEY (CFST) REFERENCES STAFF(CFST)
+);
+
+drop table if exists AUTISTI;
+CREATE TABLE if not exists AUTISTI ( 
+	nameAU VARCHAR(255),
+	surnameAU VARCHAR(255),
+	phoneNumberAU VARCHAR(255) PRIMARY KEY,
+	location VARCHAR(255)
+);
+
+-- drop table if exists programma_giornaliero;
+CREATE TABLE if not exists programma_giornaliero (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    datap DATE NOT NULL,
+    nome VARCHAR(255),
+    descrizione TEXT,
+    orario VARCHAR(255),
+    luogo VARCHAR(255),
+ 	persona_id INT,
+ 	FOREIGN KEY (persona_id) REFERENCES PERSONA(id)	
+);
+
+-- drop table if exists programma_alternativo;
+CREATE TABLE if not exists programma_alternativo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data DATE NOT NULL,
+    nome VARCHAR(255),
+    descrizione TEXT,
+    orario VARCHAR(255),
+    luogo VARCHAR(255),
+ 	persona_id INT,
+ 	FOREIGN KEY (persona_id) REFERENCES PERSONA(id)	
+);
+
+-- drop table if exists PROFILO;         
+CREATE TABLE if not exists PROFILO (
+    persona_id INT,
+    CFST CHAR(16),
+	nameST VARCHAR(255) NOT NULL,
+    surnameST VARCHAR(255) NOT NULL,
+    ageST INT NOT NULL, 
+    accomodationST VARCHAR(255),
+    residenceST VARCHAR(255),
+    placeOfDeparture VARCHAR(255),
+	destination VARCHAR(255),
+	idTR VARCHAR(255),
+    transportationST VARCHAR(255),
+    allergiesST TEXT,
+    medicalIssuesST TEXT,
+    phonenumberST VARCHAR(255) NOT NULL,
+	camp VARCHAR(255),
+    profilePicturePath VARCHAR(255),
+	campExp TEXT,
+    FOREIGN KEY (persona_id) REFERENCES PERSONA(id)
+-- 	FOREIGN KEY (CFST) REFERENCES STAFF(CFST)
+); 
+
+-- MENU
+ALTER TABLE STAFF ADD COLUMN pastoPranzo VARCHAR(255); 
+ALTER TABLE STAFF ADD COLUMN pastoCena VARCHAR(255);
+ALTER TABLE UTENTE ADD COLUMN pastoPranzo VARCHAR(255); 
+ALTER TABLE UTENTE ADD COLUMN pastoCena VARCHAR(255);
+
+drop table if exists MENU;
+drop table if exists PASTI;
+CREATE TABLE if not exists PASTI (
+	pasti VARCHAR(255) PRIMARY KEY
+);
+
+CREATE TABLE if not exists MENU (
+	pasti VARCHAR(255) PRIMARY KEY,
+	datamenu date,
+	primo VARCHAR(255),
+	secondo VARCHAR(255),
+	colazione VARCHAR(255),
+    FOREIGN KEY (pasti) REFERENCES PASTI(pasti)
+);   
 
 drop table if exists BACHECA;
-CREATE TABLE BACHECA
-         (datepost date,
-          id int auto_increment PRIMARY KEY,
-          image longblob not null);     
+CREATE TABLE if not exists BACHECA (
+	image longblob not null,
+    file_path VARCHAR(255) PRIMARY KEY,
+    dateTaken date,
+    album VARCHAR(255)
+);     
  
 drop table if exists FEEDBACK;
-CREATE TABLE FEEDBACK
-        ( id int auto_increment PRIMARY KEY,
-          experience INT,
-          mostlikedact VARCHAR(50),
-          leastlikedact VARCHAR(50),
-          menu INT,
-          accomodation INT,
-          transportation INT,
-          comments TEXT(100));
+CREATE TABLE  if not exists FEEDBACK ( 
+	id int auto_increment PRIMARY KEY,
+	experience INT,
+	mostlikedact VARCHAR(255),
+	leastlikedact VARCHAR(255),
+	menu INT,
+	accomodation INT,
+	transportation INT,
+	comments TEXT
+);
