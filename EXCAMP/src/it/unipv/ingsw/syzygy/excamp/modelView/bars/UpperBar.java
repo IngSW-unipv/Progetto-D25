@@ -4,6 +4,8 @@ import javax.swing.*;
 import it.unipv.ingsw.syzygy.excamp.database.dao.StaffProfileDAO;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.StaffProfileModel;
 import it.unipv.ingsw.syzygy.excamp.modelView.ProfileView;
+import it.unipv.ingsw.syzygy.excamp.modelView.StaffProfileView;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -157,15 +159,23 @@ public class UpperBar extends JPanel{
            "Contatti Segreteria",
            JOptionPane.INFORMATION_MESSAGE);
    }
-	private void openProfileDialog() {
+   private void openProfileDialog() {
 	    // Recupera il nome utente (ad esempio, dalla sessione o dal contesto)
-        String username = usernameField.getText(); // 
-        
+//       String username = usernameField.getText(); // 
+      
+		String idText = usernameField.getText().trim();
+	    int id;
+	    try {
+	        id = Integer.parseInt(idText);
+	    } catch (NumberFormatException e) {
+	        JOptionPane.showMessageDialog(null, "Inserisci un ID numerico valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
 	    // Recupera i dati del profilo dal DAO
-	    StaffProfileModel staffProfile = staffProfileDAO.getStaffProfile(username); // 'dao' è il tuo oggetto DAO
+	    StaffProfileModel staffProfile = staffProfileDAO.getStaffProfileById(id); // 'dao' è il tuo oggetto DAO
 	
 	    // Crea la vista del profilo 
-	    ProfileView profileView = new ProfileView(staffProfile);
+	    StaffProfileView profileView = new StaffProfileView(staffProfile);
 	
 	    // Crea il JDialog per visualizzare la vista del profilo
 	    JDialog profileDialog = new JDialog();
@@ -182,9 +192,9 @@ public class UpperBar extends JPanel{
 	}
 	
 	
-	public StaffProfileModel getStaffProfile(String username) {
+	public StaffProfileModel getStaffProfile(int id) {
 	   
-	    return staffProfileDAO.getStaffProfile(username); 
+	    return staffProfileDAO.getStaffProfileById(id); 
 	}
 	public void setForNoLogged() {
 		
