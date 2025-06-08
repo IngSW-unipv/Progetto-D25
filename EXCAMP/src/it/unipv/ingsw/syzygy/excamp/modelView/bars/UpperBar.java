@@ -159,9 +159,7 @@ public class UpperBar extends JPanel{
            "Contatti Segreteria",
            JOptionPane.INFORMATION_MESSAGE);
    }
-   private void openProfileDialog() {
-	    // Recupera il nome utente (ad esempio, dalla sessione o dal contesto)
-//       String username = usernameField.getText(); // 
+   private void openProfileDialog() { 
       
 		String idText = usernameField.getText().trim();
 	    int id;
@@ -171,23 +169,18 @@ public class UpperBar extends JPanel{
 	        JOptionPane.showMessageDialog(null, "Inserisci un ID numerico valido.", "Errore", JOptionPane.ERROR_MESSAGE);
 	        return;
 	    }
-	    // Recupera i dati del profilo dal DAO
-	    StaffProfileModel staffProfile = staffProfileDAO.getStaffProfileById(id); // 'dao' è il tuo oggetto DAO
+	    StaffProfileModel staffProfile = staffProfileDAO.getStaffProfileById(id);
 	
-	    // Crea la vista del profilo 
 	    StaffProfileView profileView = new StaffProfileView(staffProfile);
 	
-	    // Crea il JDialog per visualizzare la vista del profilo
 	    JDialog profileDialog = new JDialog();
 	    profileDialog.setTitle("Profilo dello Staff");
 	    profileDialog.setModal(true); 
 	    profileDialog.setSize(500, 400); 
 	    profileDialog.setLocationRelativeTo(null); 
 	
-	    // Aggiungi la vista del profilo al JDialog
 	    profileDialog.add(profileView);
 	   
-	    // Mostra il JDialog
 	    profileDialog.setVisible(true);
 	}
 	
