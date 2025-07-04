@@ -15,7 +15,7 @@ public class MainWindow extends JFrame {
     private CardLayout cardLayout;
     private RegistrationFormController registrationFormController;
     private PaymentSelectionView paymentSelectionView;
-    private ProfileView profileView;
+    private StaffProfileView profileView;
     
     public MainWindow() {
     	
