@@ -35,9 +35,9 @@ public class Amministratore extends Persona {
 	 @Override
 	    public boolean login(LoginModel loginModel) throws AccountLockedException {
 	        try {
-	            loginModel.loginAmministratore(username, password);
+	            loginModel.loginAmministratore(getUsername(), getPassword());
 	            setLoggedIn(true);
-	            System.out.println("Login riuscito per amministratore " + username);
+	            System.out.println("Login riuscito per amministratore " + getUsername());
 	            return true;
 	        } catch (AccountNotFoundException | WrongPasswordException e) {
 	            System.out.println("Errore di login: " + e.getMessage());
