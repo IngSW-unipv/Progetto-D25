@@ -51,9 +51,6 @@ public class Trasporto extends Organizzazione {
     public void rimuoviAutista(Autista autista) {}
 
     @Override
-    public void visualizzaAutisti() {}
-
-    @Override
     public void aggiungiAlloggioPartecipante(Albergo alloggio) {}
 
     @Override

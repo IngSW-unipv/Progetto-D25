@@ -57,9 +57,6 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Location;
    public void rimuoviAutista(Autista autista) {
    }
    @Override
-   public void visualizzaAutisti() {
-   }
-   @Override
    public void aggiungiAlloggioPartecipante(Albergo alloggio) {
    }
    @Override

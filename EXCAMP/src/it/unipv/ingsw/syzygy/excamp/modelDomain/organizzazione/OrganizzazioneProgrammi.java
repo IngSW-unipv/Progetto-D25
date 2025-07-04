@@ -35,10 +35,6 @@ public class OrganizzazioneProgrammi extends Organizzazione {
    }
    
    @Override
-   public void visualizzaAutisti() {
-   }
-   
-   @Override
    public void aggiungiAlloggioPartecipante(Albergo alloggio) {
    }
    

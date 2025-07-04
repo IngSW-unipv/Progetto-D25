@@ -3,7 +3,7 @@ package it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione;
 import java.util.List;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Location;
 
-public abstract class OrganizzazioneAutisti extends Organizzazione {
+public class OrganizzazioneAutisti extends Organizzazione {
 	
    private ListaContattiAutisti listaContattiAutisti;
    private static final int MIN_AUTISTI = 5; // Quantità minima di autisti

@@ -29,8 +29,7 @@ public abstract class Organizzazione {
    
    // Metodi generici sugli autisti
    public abstract boolean aggiungiAutista(Autista autista); 
-   public abstract void rimuoviAutista(Autista autista); 
-   public abstract void visualizzaAutisti(); 
+   public abstract void rimuoviAutista(Autista autista);  
    
    // Metodi relativi agli alloggi
    public abstract void aggiungiAlloggioPartecipante(Albergo alloggio);

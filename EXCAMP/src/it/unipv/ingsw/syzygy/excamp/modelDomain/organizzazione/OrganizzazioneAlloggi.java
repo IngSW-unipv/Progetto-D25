@@ -34,10 +34,6 @@ public class OrganizzazioneAlloggi extends Organizzazione {
    }
    
    @Override
-   public void visualizzaAutisti() {
-   }
-   
-   @Override
    public void aggiungiTrasporto() {
    }
    
