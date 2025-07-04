@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import it.unipv.ingsw.syzygy.excamp.database.dao.organizzazione.ProgrammaDAO;
 import it.unipv.ingsw.syzygy.excamp.database.dao.organizzazione.TrasportoDAO;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountLockedException;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountNotFoundException;
@@ -25,29 +26,18 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.Trasporto;
 
 public class Amministratore extends Persona {
 	private Location location;
-	private OrganizzazioneProgrammi organizzazioneProgrammi;
-	private OrganizzazioneAutisti organizzazioneAutisti;
 	
-	 public Amministratore(int id, String username, String password,Location location,
-			 OrganizzazioneProgrammi organizzazioneProgrammi, OrganizzazioneAutisti organizzazioneAutisti) {
+	 public Amministratore(int id, String username, String password,Location location) {
 	        super(id, username, password);
 	        this.setLocation(location);
-	        this.organizzazioneProgrammi = organizzazioneProgrammi;
-	        this.organizzazioneAutisti = new OrganizzazioneAutisti(location) {
-				@Override
-				public List<Trasporto> getAllTrasporti() {
-					// TODO Auto-generated method stub
-					return null;
-				}
-	        };
 	 }
 	
 	 @Override
 	    public boolean login(LoginModel loginModel) throws AccountLockedException {
 	        try {
-	            loginModel.loginAmministratore(getUsername(), getPassword());
+	            loginModel.loginAmministratore(username, password);
 	            setLoggedIn(true);
-	            System.out.println("Login riuscito per amministratore " + getUsername());
+	            System.out.println("Login riuscito per amministratore " + username);
 	            return true;
 	        } catch (AccountNotFoundException | WrongPasswordException e) {
 	            System.out.println("Errore di login: " + e.getMessage());
@@ -86,49 +76,68 @@ public class Amministratore extends Persona {
     }
  
     
-	public void caricaProgramma() {
+	
+    public void caricaProgramma() {
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
         organizzazioneProgrammi.caricaProgramma();
     }
 
+
     public void salvaProgramma() {
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
         organizzazioneProgrammi.salvaProgramma();
     }
-	
-	public void pubblicaProgramma(ProgrammaGiornaliero programma) {
-	        organizzazioneProgrammi.aggiungiProgrammaGiornaliero(programma.getData(), programma);
-	    }
+
+    public void pubblicaProgramma(ProgrammaGiornaliero programma) {
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        organizzazioneProgrammi.aggiungiProgrammaGiornaliero(programma.getData(), programma);
+    }
+
 
     public void pubblicaProgrammaAlternativo(ProgrammaAlternativo programma) {
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
         organizzazioneProgrammi.aggiungiProgrammaAlternativo(programma.getData(), programma);
     }
 
     public ProgrammaGiornaliero visualizzaProgramma(String data) {
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
         return organizzazioneProgrammi.getProgrammaGiornaliero(data);
     }
 
+
     public ProgrammaAlternativo visualizzaProgrammaAlternativo(String data) {
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
         return organizzazioneProgrammi.getProgrammaAlternativo(data);
     }
 
     
+    
+    
     // Gestione autisti: aggiungi un autista alla lista
     public boolean aggiungiAutista(Autista autista) {
+        OrganizzazioneAutisti organizzazioneAutisti = new OrganizzazioneAutisti(location);
         return organizzazioneAutisti.aggiungiAutista(autista);
     }
 
+
     public void rimuoviAutista(Autista autista) {
+        OrganizzazioneAutisti organizzazioneAutisti = new OrganizzazioneAutisti(location);
         organizzazioneAutisti.rimuoviAutista(autista);
     }
 
+
     // Visualizza la lista degli autisti (per l'amministratore)
     public void visualizzaListaAutisti() {
+        OrganizzazioneAutisti organizzazioneAutisti = new OrganizzazioneAutisti(location);
         ListaContattiAutisti lista = organizzazioneAutisti.getListaContattiAutisti();
         for (Autista autista : lista.getAutisti()) {
             System.out.println("Nome: " + autista.getNameAU() + " Cognome: " + autista.getSurnameAU() + " Tel: " + autista.getPhoneNumberAU() + " Location: " + autista.getLocation());
         }
     }
 
+
     public ListaContattiAutisti getListaContattiAutisti() {
+        OrganizzazioneAutisti organizzazioneAutisti = new OrganizzazioneAutisti(location);
         return organizzazioneAutisti.getListaContattiAutisti();
     }
 
@@ -170,6 +179,9 @@ public class Amministratore extends Persona {
                       
         return false;
     }
-  
+
+    
     
 }
+
+
