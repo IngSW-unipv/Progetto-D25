@@ -3,7 +3,6 @@ package it.unipv.ingsw.syzygy.excamp.modelView.bars;
 import javax.swing.*;
 import it.unipv.ingsw.syzygy.excamp.database.dao.StaffProfileDAO;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.StaffProfileModel;
-import it.unipv.ingsw.syzygy.excamp.modelView.ProfileView;
 import it.unipv.ingsw.syzygy.excamp.modelView.StaffProfileView;
 
 import java.awt.*;
