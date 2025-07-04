@@ -65,9 +65,9 @@ public class Staff extends Persona {
 	 @Override
 	 public boolean login(LoginModel loginModel) throws AccountLockedException {
 	        try {
-	            loginModel.loginStaff(username, password);
+	            loginModel.loginStaff(getUsername(), getPassword());
 	            setLoggedIn(true);
-	            System.out.println("Login riuscito per staff " + username);
+	            System.out.println("Login riuscito per staff " + getUsername());
 	            return true;
 	        } catch (AccountNotFoundException | WrongPasswordException e) {
 	            System.out.println("Errore di login: " + e.getMessage());

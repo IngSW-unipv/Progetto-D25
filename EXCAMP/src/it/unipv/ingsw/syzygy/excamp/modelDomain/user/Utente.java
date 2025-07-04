@@ -64,9 +64,9 @@ public class Utente extends Persona{
 	@Override
     public boolean login(LoginModel loginModel) throws AccountLockedException {
         try {
-            loginModel.loginUtente(username, password);
+            loginModel.loginUtente(getUsername(), getPassword());
             setLoggedIn(true);
-            System.out.println("Login riuscito per utente " + username);
+            System.out.println("Login riuscito per utente " + getUsername());
             return true;
         } catch (AccountNotFoundException | WrongPasswordException | StayEndedException e) {
             System.out.println("Errore di login: " + e.getMessage());

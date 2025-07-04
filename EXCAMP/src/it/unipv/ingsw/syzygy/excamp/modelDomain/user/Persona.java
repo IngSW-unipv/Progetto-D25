@@ -6,8 +6,8 @@ import it.unipv.ingsw.syzygy.excamp.exceptions.AccountLockedException;
 
 abstract class Persona {
   private int id;
-  protected String username;
-  protected String password;
+  private String username;
+  private String password;
   private boolean isLoggedIn;  // Stato di login dell'utente
 
   public Persona(int id, String username, String password) {
