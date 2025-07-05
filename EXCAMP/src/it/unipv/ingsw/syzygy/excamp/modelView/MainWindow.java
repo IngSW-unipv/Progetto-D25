@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 
         registrationFormController = new RegistrationFormController(null, registrationModel);
 
-        RegistrationFormView registrationView = new RegistrationFormView(registrationFormController);
+        RegistrationFormView registrationView = new RegistrationFormView(registrationFormController, true);
 
         registrationView.setMainWindow(this);
         registrationFormController.setView(registrationView); 

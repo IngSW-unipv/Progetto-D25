@@ -14,10 +14,10 @@ public class RegistrationFormDAO {
 	}
 	
 	public void insertIntoDatabase(RegistrationFormModel iscrizione) throws Exception {
-		String query = "INSERT INTO iscrizione (username2, password2, nameGE2, surnameGE2, parentsInfoPA2, namePA2, surnamePA2, " +
-			"agePA2, cFPA2, allergiesPA2, medicalIssuesPA2, sensitiveInfoPA2, genderPA2, paese2, indirizzo2, civico2, cAP2, " +
-			"provincia2, dateOfBirth2, placeOfBirth2, camp2, transportation2, pointOfDeparture2, participationWeek2, notes2, accettatoRegolamento2," +
-			"accettatoConditions2, accettatoPrivacy2)" +
+		String query = "INSERT INTO iscrizione (usernameIS, passwordIS, nameGE, surnameGE, parentsInfoPA, namePA, surnamePA, " +
+			"agePA, CFPA, allergiesPA, medicalIssuesPA, sensitiveInfoPA, genderPA, paese, indirizzo, civico, CAP, " +
+			"provincia, dateOfBirthPA, placeOfBirthPA, camp, transportationPA, pointOfDeparture, participationWeek, notes, accettatoRegolamento," +
+			"accettatoConditions, accettatoPrivacy)" +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement pstmt = connection.prepareStatement(query)) {
 			pstmt.setString(1, iscrizione.getUsername());

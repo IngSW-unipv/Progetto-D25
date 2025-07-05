@@ -46,12 +46,20 @@ public class RegistrationFormView extends JPanel {
    private RegistrationFormController controller;
    private MainWindow mainWindow;
    
-   public RegistrationFormView(RegistrationFormController controller) {
-       
+//     public RegistrationFormView(RegistrationFormController controller) {
+//     
+   public RegistrationFormView(RegistrationFormController controller, boolean showGui) {
+	    this.controller = controller;
+	    if (showGui) {
+	        frame = new JFrame("Modulo di Iscrizione");
+	        // ... mostra GUI
+	        frame.setVisible(true);
+	    }
+
 	   if (controller == null) {
 	        throw new IllegalArgumentException("Il controller non può essere null");
 	    }
-	   this.controller = controller;
+	 //  this.controller = controller;
 	   
 	   frame = new JFrame("Modulo di Iscrizione");
        cardLayout = new CardLayout();
@@ -104,12 +112,12 @@ public class RegistrationFormView extends JPanel {
 	    fase1.add(createLabel("Cognome del genitore/tutore*:"));
 	    fase1.add(surnameGEField);
 
-	    fase1.add(createLabel("Email*:"));
+	    fase1.add(createLabel("Email (Username)*:"));
 	    fase1.add(usernameField);
 
-	    fase1.add(createLabel("Conferma email*:"));
+	    fase1.add(createLabel("Conferma email (Username)*:"));
 	    fase1.add(confirmUsernameField);
-
+	    
 	    fase1.add(createLabel("Password*:"));
 	    fase1.add(passwordField);
 
@@ -269,8 +277,7 @@ public class RegistrationFormView extends JPanel {
 	    JButton paymentButton = new JButton("Procedere al pagamento");
 	    paymentButton.addActionListener(e -> {
 	        System.out.println("Procedi al pagamento cliccato");  // Debug
-	        RegistrationFormController registrationFormController = new RegistrationFormController(null, null);
-			registrationFormController.proceedToPayment();
+	        controller.proceedToPayment();
 	    });
 	    fase4.add(paymentButton);
 

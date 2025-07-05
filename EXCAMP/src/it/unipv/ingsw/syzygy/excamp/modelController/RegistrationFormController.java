@@ -102,6 +102,7 @@ public class RegistrationFormController {
            JOptionPane.showMessageDialog(view.getFrame(), "Modulo completato con successo!");
        } catch (SQLException e) {
            JOptionPane.showMessageDialog(view.getFrame(), "Errore nel salvataggio del modulo.");
+           throw e;
        }
        // Mostra il prezzo prima di procedere al pagamento
        String prezzo = model.getPrezzo();  // Recupera il prezzo dal modello
