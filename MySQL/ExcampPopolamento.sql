@@ -1,0 +1,158 @@
+USE testdb;
+
+INSERT INTO PERSONA VALUES (1,'amministratore.experience', 'abcde123');
+INSERT INTO PERSONA VALUES (2,'amministratore.experience', 'fghijk456');
+INSERT INTO PERSONA VALUES (3,'amministratore.experience', 'lmnopqq789');
+INSERT INTO PERSONA VALUES (4,'staff.experience', 'maria.bianchi');
+INSERT INTO PERSONA VALUES (5,'staff.experience', 'alessandro.rossi');
+INSERT INTO PERSONA VALUES (6,'staff.experience', 'franco.marino');
+INSERT INTO PERSONA VALUES (7,'staff.experience', 'giada.torri');
+INSERT INTO PERSONA VALUES (8,'staff.experience', 'lorenzo.corsi');
+INSERT INTO PERSONA VALUES (9,'asdfgh', 'asdfgh');
+INSERT INTO PERSONA VALUES (10,'qwertyui', 'qwertyui');
+
+INSERT INTO AMMINISTRATORE VALUES (1,'VAL_DI_FASSA');
+INSERT INTO AMMINISTRATORE VALUES (2,'LIGNANO_SABBIADORO');
+INSERT INTO AMMINISTRATORE VALUES (3,'GROSSETO');
+
+
+INSERT INTO TRASPORTI VALUES ('ABC4', '2025-09-22', '06:00', 'BERGAMO', 'BUS', '09:00', 9, 'VAL_DI_FASSA');
+INSERT INTO TRASPORTI VALUES ('ABC5', '2025-09-22', '06:00' , 'PADOVA','BUS','09:00', 10, 'LIGNANO_SABBIADORO');
+INSERT INTO TRASPORTI VALUES ('ABC3','2025-09-22', '06:00' , 'BERGAMO','BUS','09:00', 8, 'VAL_DI_FASSA');
+INSERT INTO TRASPORTI VALUES ('ABC6', '2025-09-22', '06:00' , 'VENEZIA','TRENO','09:00', 7, 'GROSSETO');
+INSERT INTO TRASPORTI VALUES ('ADC4', '2025-09-22', '06:00' , 'MILANO','BUS', '09:00', 6, 'LIGNANO_SABBIADORO');
+INSERT INTO TRASPORTI VALUES ('ACC6','2025-09-22','06:15' , 'PADOVA','AUTONOMO', '09:20', 5, 'VAL_DI_FASSA');
+INSERT INTO TRASPORTI VALUES ('ASR9', '2025-09-22', '06:00' , 'BERGAMO','BUS', '09:20', 4, 'GROSSETO');
+
+INSERT INTO STAFF (
+    persona_id, CFST, nameST, surnameST, ageST, accommodationST, residenceST, 
+    placeOfDeparture, destination, idTR, transportationST, 
+    allergiesST, medicalIssuesST, phonenumberST, camp
+)
+VALUES 
+(4, 'BIMA39238D839333', 'MARIA', 'BIANCHI', 20, 'HOTEL A', 'MILANO',
+ 'BERGAMO', 'VAL_DI_FASSA', 'ASR9', 'BUS', 'PESCE', NULL, 
+ '34802356541', 'NUOTO');
+ 
+INSERT INTO STAFF (
+    persona_id, CFST, nameST, surnameST, ageST, accommodationST, residenceST, 
+    placeOfDeparture, destination, idTR, transportationST, 
+    allergiesST, medicalIssuesST, phonenumberST, camp
+) 
+VALUES 
+(5, 'ROAL83839T930555', 'ALESSANDRO', 'ROSSI', 23, 'HOTEL B','PADOVA', 'PADOVA', 'LIGNANO_SABBIADORO', 'ACC6', 'AUTONOMO', 'API', NULL, '34678675382', 'VELA');
+
+INSERT INTO STAFF (
+    persona_id, CFST, nameST, surnameST, ageST, accommodationST, residenceST,
+    placeOfDeparture, destination, idTR, transportationST, 
+    allergiesST, medicalIssuesST, phonenumberST, camp
+) 
+VALUES 
+(6, 'MAFR83932G839777', 'FRANCO', 'MARINO', 19, 'HOTEL C', 'MLANO','MILANO', 'GROSSETO', 'ADC4', 'BUS', 'PASTA ROSSA', 'CELIACHIA', '36257953642', 'RUGBY');
+
+INSERT INTO STAFF (
+    persona_id, CFST, nameST, surnameST, ageST, accommodationST, 
+    placeOfDeparture, destination, idTR, transportationST, 
+    allergiesST, medicalIssuesST, phonenumberST, camp
+) 
+VALUES 
+(7, 'TOGI39209S839222', 'GIADA', 'TORRI', 25, 'HOTEL A', 'VENEZIA', 'VAL_DI_FASSA', 'ABC6', 'TRENO', 'POLVERE', NULL, '34785666732', 'MOUNTAIN_BIKE');
+
+INSERT INTO STAFF (
+    persona_id, CFST, nameST, surnameST, ageST, accommodationST, 
+    placeOfDeparture, destination, idTR, transportationST, 
+    allergiesST, medicalIssuesST, phonenumberST, camp
+) 
+VALUES 
+(8, 'COLO29173I763111', 'LORENZO', 'CORSI', 22, 'HOTEL A', 'BERGAMO', 'VAL_DI_FASSA', 'ABC3', 'BUS', NULL, NULL, '31475843458', 'ARRAMPICATA');
+
+INSERT INTO ISCRIZIONE (
+    usernameIS, passwordIS, nameGE, surnameGE, parentsInfoPA, 
+    namePA, surnamePA, agePA, CFPA, genderPA, paese, 
+    indirizzo, civico, CAP, provincia, località, dateOfBirthPA, 
+    placeOfBirthPA, participationWeek, transportationPA, allergiesPA, 
+    medicalIssuesPA, sensitiveInfoPA, camp, notes, 
+    accettatoRegolamento, accettatoConditions, accettatoPrivacy
+) 
+VALUES 
+(
+    'asdfgh', 'asdfgh', 'MARIO', 'BELLI', '30675239657', 'PAOLA', 
+    'BELLI', 14, 'BEPA39938P859555', 'FEMMINA', 'ITALIA', 
+    'VIA A. P.', '5', 25790, 'BERGAMO', 'BERGAMO', '2011-09-24', 
+    'PALERMO', '2025-09-22', 'BUS', NULL, NULL, NULL, 'ARRAMPICATA', 
+    NULL, TRUE, TRUE, TRUE
+);
+
+INSERT INTO ISCRIZIONE (
+    usernameIS, passwordIS, nameGE, surnameGE, parentsInfoPA, 
+    namePA, surnamePA, agePA, CFPA, genderPA, paese, 
+    indirizzo, civico, CAP, provincia, località, dateOfBirthPA, 
+    placeOfBirthPA, participationWeek, transportationPA, allergiesPA, 
+    medicalIssuesPA, sensitiveInfoPA, camp, notes, 
+    accettatoRegolamento, accettatoConditions, accettatoPrivacy
+) 
+VALUES 
+(
+    'qwertyu', 'qwertyu', 'ROBERTO', 'DRAGHI', '30698876657', 'BRUNO', 
+    'DRAGHI', 17, 'BEPA39938P859777', 'MASCHIO', 'ITALIA', 'VIA O. N.', 
+    '9', 25990, 'PADOVA', 'PADOVA', '2006-09-24', 'PALERMO', '2025-09-22', 
+    'BUS', NULL, NULL, NULL, 'MOUNTAIN_BIKE', NULL, TRUE, TRUE, TRUE
+);
+
+INSERT INTO UTENTE (
+    persona_id, namePA, surnamePA, agePA, CFPA, accommodationPA, 
+    placeOfDeparture, destination, idTR, transportationPA, 
+    allergiesPA, medicalIssuesPA, sensitiveInfoPA, parentsInfoPA, camp
+) 
+VALUES 
+(9, 'PAOLA', 'BELLI', 14, 'BEPA39938P859777', 'HOTEL A', 'BERGAMO', 'VAL_DI_FASSA', 'ABC4', 'BUS', NULL, NULL, NULL, '34802796541', 'ARRAMPICATA');
+
+INSERT INTO UTENTE (
+    persona_id, namePA, surnamePA, agePA, CFPA, accommodationPA, 
+    placeOfDeparture, destination, idTR, transportationPA, 
+    allergiesPA, medicalIssuesPA, sensitiveInfoPA, parentsInfoPA, camp
+) 
+VALUES 
+(10, 'BRUNO', 'DRAGHI', 17, 'BEPA39938P859777', 'HOTEL A', 'PADOVA', 'VAL_DI_FASSA', 'ABC5', 'BUS', 'PESCE', NULL, NULL, '34887796341', 'MOUNTAIN_BIKE');
+
+
+INSERT INTO PASTI VALUES ('PASTA');
+INSERT INTO PASTI VALUES ('PIZZA');
+INSERT INTO PASTI VALUES ('RISOTTO');
+INSERT INTO PASTI VALUES ('LASAGNA');
+INSERT INTO PASTI VALUES ('PESCE');
+INSERT INTO PASTI VALUES ('HAMBURGER');
+INSERT INTO PASTI VALUES ('BBQ');
+INSERT INTO PASTI VALUES ('RISO');
+INSERT INTO PASTI VALUES ('POLLO');
+
+INSERT INTO ALLOGGIOPA VALUES (1, 'VAL_DI_FASSA','MOUNTAIN_BIKE', 'HOTEL A', 25, 'BEPA39938P859777', 9);
+INSERT INTO ALLOGGIOPA VALUES (2, 'VAL_DI_FASSA','ARRAMPICATA', 'HOTEL A', 37, 'BEPA39938P859777', 10);
+
+INSERT INTO ALLOGGIOST VALUES (3, 'VAL_DI_FASSA','ARRAMPICATA', 'HOTEL A', 39, 8);
+INSERT INTO ALLOGGIOST VALUES (4, 'VAL_DI_FASSA','MOUNTAIN_BIKE', 'HOTEL A', 15, 7);
+INSERT INTO ALLOGGIOST VALUES (5, 'GROSSETO','RUGBY', 'HOTEL C', 32, 6);
+INSERT INTO ALLOGGIOST VALUES (6, 'LIGNANO_SABBIADORO','VELA', 'HOTEL B', 30, 5);
+INSERT INTO ALLOGGIOST VALUES (7, 'VAL_DI_FASSA','NUOTO', 'HOTEL A', 29, 4);
+
+INSERT INTO AUTISTI VALUES ('GIORGIO','FRANCHI', '35796552189','GROSSETO');
+INSERT INTO AUTISTI VALUES ('DARIO','BRUNI', '37855097812','VAL_DI_FASSA');
+INSERT INTO AUTISTI VALUES ('GIORGIO','FRANCHI', '34536754043','LIGNANO_SABBIADORO');
+
+
+INSERT INTO PROGRAMMA_GIORNALIERO VALUES (1,'2025-09-22', 'ARRAMPICATA A','BASI ARRAMPICATA', '11:00 - 13:00', 'VAL_DI_FASSA', 8);
+INSERT INTO PROGRAMMA_GIORNALIERO VALUES (2,'2025-09-22', 'ATLETICA','ATTIVITA DI ATLETICA', '15.00 - 17:00','VAL_DI_FASSA', 8);
+INSERT INTO PROGRAMMA_GIORNALIERO VALUES (3,'2025-09-22', 'ARRAMPICATA A','BASI ARRAMPICATA', '17.00 - 19:00','VAL_DI_FASSA', 8);
+
+INSERT INTO PROGRAMMA_GIORNALIERO VALUES (4, '2025-09-22', 'ATLETICA','ATTIVITA DI ATLETICA', '11:00 - 13:00', 'VAL_DI_FASSA', 7);
+INSERT INTO PROGRAMMA_GIORNALIERO VALUES (5,'2025-09-22', 'MOUNTAIN_BIKE A','BASI MOUNTAIN BIKE', '15.00 - 17:00','VAL_DI_FASSA', 7);
+INSERT INTO PROGRAMMA_GIORNALIERO VALUES (6, '2025-09-22', 'PALESTRA','PERCORSI AL CHIUSO', '17.00 - 19:00','VAL_DI_FASSA', 7);
+
+
+INSERT INTO PROGRAMMA_ALTERNATIVO VALUES (1,'2025-09-22', 'PALESTRA','ATTIVITA AL COPERTO', '11:00 - 13:00','VAL_DI_FASSA', 8);
+INSERT INTO PROGRAMMA_ALTERNATIVO VALUES (2, '2025-09-22', 'PALESTRA','ATTIVITA AL COPERTO', '15.00 - 17:00','VAL_DI_FASSA', 8);
+INSERT INTO PROGRAMMA_ALTERNATIVO VALUES (3, '2025-09-22', 'PALESTRA','ATTIVITA AL COPERTO', '17.00 - 19:00','VAL_DI_FASSA', 8);
+
+INSERT INTO PROGRAMMA_ALTERNATIVO VALUES (4,'2025-09-22', 'PALESTRA','ATTIVITA AL COPERTO', '11:00 - 13:00','VAL_DI_FASSA', 7);
+INSERT INTO PROGRAMMA_ALTERNATIVO VALUES (5,'2025-09-22', 'PALESTRA','ATTIVITA AL COPERTO', '15.00 - 17:00','VAL_DI_FASSA', 7);
+INSERT INTO PROGRAMMA_ALTERNATIVO VALUES (6, '2025-09-22', 'PALESTRA','ATTIVITA AL COPERTO', '17.00 - 19:00','VAL_DI_FASSA', 7);
