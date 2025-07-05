@@ -18,7 +18,7 @@ Il software per funzionare necessita l'installazione delle seguenti librerie:
 ## Setup iniziale 
 Per quanto riguarda il database MySQL:
 1. Aprire MySQL Workbench e creare un'istanza in locale del database
-2. Importare i file querydbprogettofinal e ExcampPopolamento
+2. Importare i file ExcampDB e ExcampPopolamento
 3. Creare un profilo di accesso al database e concedergli le corrette autorizzazioni
 
 ## Documentazione
