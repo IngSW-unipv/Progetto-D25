@@ -70,7 +70,7 @@ INSERT INTO ISCRIZIONE (
     usernameIS, passwordIS, nameGE, surnameGE, parentsInfoPA, 
     namePA, surnamePA, agePA, CFPA, genderPA, paese, 
     indirizzo, civico, CAP, provincia, località, dateOfBirthPA, 
-    placeOfBirthPA, participationWeek, transportationPA, allergiesPA, 
+    placeOfBirthPA, participationWeek, transportationPA, pointOfDeparture, allergiesPA, 
     medicalIssuesPA, sensitiveInfoPA, camp, notes, 
     accettatoRegolamento, accettatoConditions, accettatoPrivacy
 ) 
@@ -79,7 +79,7 @@ VALUES
     'asdfgh', 'asdfgh', 'MARIO', 'BELLI', '30675239657', 'PAOLA', 
     'BELLI', 14, 'BEPA39938P859555', 'FEMMINA', 'ITALIA', 
     'VIA A. P.', '5', 25790, 'BERGAMO', 'BERGAMO', '2011-09-24', 
-    'PALERMO', '2025-09-22', 'BUS', NULL, NULL, NULL, 'ARRAMPICATA', 
+    'PALERMO', '2025-09-22', 'BUS', 'BERGAMO', NULL, NULL, NULL, 'ARRAMPICATA', 
     NULL, TRUE, TRUE, TRUE
 );
 
@@ -87,7 +87,7 @@ INSERT INTO ISCRIZIONE (
     usernameIS, passwordIS, nameGE, surnameGE, parentsInfoPA, 
     namePA, surnamePA, agePA, CFPA, genderPA, paese, 
     indirizzo, civico, CAP, provincia, località, dateOfBirthPA, 
-    placeOfBirthPA, participationWeek, transportationPA, allergiesPA, 
+    placeOfBirthPA, participationWeek, transportationPA, pointOfDeparture, allergiesPA, 
     medicalIssuesPA, sensitiveInfoPA, camp, notes, 
     accettatoRegolamento, accettatoConditions, accettatoPrivacy
 ) 
@@ -96,7 +96,7 @@ VALUES
     'qwertyu', 'qwertyu', 'ROBERTO', 'DRAGHI', '30698876657', 'BRUNO', 
     'DRAGHI', 17, 'BEPA39938P859777', 'MASCHIO', 'ITALIA', 'VIA O. N.', 
     '9', 25990, 'PADOVA', 'PADOVA', '2006-09-24', 'PALERMO', '2025-09-22', 
-    'BUS', NULL, NULL, NULL, 'MOUNTAIN_BIKE', NULL, TRUE, TRUE, TRUE
+    'BUS', 'PADOVA', NULL, NULL, NULL, 'MOUNTAIN_BIKE', NULL, TRUE, TRUE, TRUE
 );
 
 INSERT INTO UTENTE (
@@ -129,11 +129,11 @@ INSERT INTO PASTI VALUES ('POLLO');
 INSERT INTO ALLOGGIOPA VALUES (1, 'VAL_DI_FASSA','MOUNTAIN_BIKE', 'HOTEL A', 25, 'BEPA39938P859777', 9);
 INSERT INTO ALLOGGIOPA VALUES (2, 'VAL_DI_FASSA','ARRAMPICATA', 'HOTEL A', 37, 'BEPA39938P859777', 10);
 
-INSERT INTO ALLOGGIOST VALUES (3, 'VAL_DI_FASSA','ARRAMPICATA', 'HOTEL A', 39, 8);
-INSERT INTO ALLOGGIOST VALUES (4, 'VAL_DI_FASSA','MOUNTAIN_BIKE', 'HOTEL A', 15, 7);
-INSERT INTO ALLOGGIOST VALUES (5, 'GROSSETO','RUGBY', 'HOTEL C', 32, 6);
-INSERT INTO ALLOGGIOST VALUES (6, 'LIGNANO_SABBIADORO','VELA', 'HOTEL B', 30, 5);
-INSERT INTO ALLOGGIOST VALUES (7, 'VAL_DI_FASSA','NUOTO', 'HOTEL A', 29, 4);
+INSERT INTO ALLOGGIOST VALUES (3, 'VAL_DI_FASSA','ARRAMPICATA', 'HOTEL A', 39, 'COLO29173I763111', 8);
+INSERT INTO ALLOGGIOST VALUES (4, 'VAL_DI_FASSA','MOUNTAIN_BIKE', 'HOTEL A', 15, 'TOGI39209S839222', 7);
+INSERT INTO ALLOGGIOST VALUES (5, 'GROSSETO','RUGBY', 'HOTEL C', 32, 'MAFR83932G839777', 6);
+INSERT INTO ALLOGGIOST VALUES (6, 'LIGNANO_SABBIADORO','VELA', 'HOTEL B', 30,'ROAL83839T930555', 5);
+INSERT INTO ALLOGGIOST VALUES (7, 'VAL_DI_FASSA','NUOTO', 'HOTEL A', 29,'BIMA39238D839333', 4);
 
 INSERT INTO AUTISTI VALUES ('GIORGIO','FRANCHI', '35796552189','GROSSETO');
 INSERT INTO AUTISTI VALUES ('DARIO','BRUNI', '37855097812','VAL_DI_FASSA');

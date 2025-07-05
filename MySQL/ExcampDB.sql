@@ -68,6 +68,7 @@ CREATE TABLE if not exists ISCRIZIONE (
     placeOfBirthPA VARCHAR(255),
     participationWeek DATE NOT NULL, 
     transportationPA VARCHAR(255) NOT NULL,
+    pointOfDeparture VARCHAR(255) NOT NULL,
     allergiesPA TEXT,
     medicalIssuesPA TEXT,
     sensitiveInfoPA TEXT,
