@@ -24,15 +24,15 @@ public class PaymentDataDWView extends JPanel {
        errorLabel.setFont(font);
        errorLabel.setForeground(Color.RED);
        // Logo for payment method
-       ImageIcon digitalWalletLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/DigitalWallet.png"));
+       ImageIcon digitalWalletLogo = new ImageIcon(getClass().getResource("resources/digitalWallet.png"));
        JLabel digitalWalletImage = new JLabel(digitalWalletLogo);
        digitalWalletImage.setPreferredSize(new Dimension(150, 150));
        // Back button
-       ImageIcon backArrowIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/backArrow.png"));
+       ImageIcon backArrowIcon = new ImageIcon(getClass().getResource("resources/backArrow.png"));
        backButton.setIcon(backArrowIcon);
        backButton.setBackground(new Color(145, 186, 214));
        // Next button
-       ImageIcon nextArrowIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/NewBuyButton.png"));
+       ImageIcon nextArrowIcon = new ImageIcon(getClass().getResource("resources/nextArrow.jpg"));
        nextButton.setIcon(nextArrowIcon);
        nextButton.setBackground(new Color(145, 186, 214));
        // Set up the layout

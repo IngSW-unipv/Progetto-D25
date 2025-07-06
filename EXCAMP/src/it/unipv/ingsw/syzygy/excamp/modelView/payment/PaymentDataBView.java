@@ -52,10 +52,10 @@ public class PaymentDataBView extends JPanel {
        insertImporto.setFont(font);
        insertCausale.setFont(font);
        // Configure backButton
-       backButton.setIcon(new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/backArrow.png")));
+       backButton.setIcon(new ImageIcon(getClass().getResource("resources/backArrow.png")));
        backButton.setBackground(new Color(145, 186, 214));
        // Configure nextButton
-       nextButton.setIcon(new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/NewBuyButton.png")));
+       nextButton.setIcon(new ImageIcon(getClass().getResource("resources/nextArrow.jpg")));
        nextButton.setBackground(new Color(145, 186, 214));
        // Create GridBagLayout for input fields
        JPanel dataInput = new JPanel(new GridBagLayout());
@@ -97,7 +97,7 @@ public class PaymentDataBView extends JPanel {
        // Panel for the bank logo
        JPanel rightPanel = new JPanel();
        rightPanel.setLayout(new BorderLayout());
-       JLabel bankImage = new JLabel(new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/BankLogo.png")));
+       JLabel bankImage = new JLabel(new ImageIcon(getClass().getResource("resources/bankLogo.png")));
        rightPanel.add(bankImage, BorderLayout.CENTER);
        // Create HBox for buttons
        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
