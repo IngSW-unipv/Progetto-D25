@@ -49,11 +49,11 @@ public class PaymentSelectionView extends JPanel {
        CCButton.setFont(font);
        BButton.setFont(font);
        // Icone per i pulsanti
-       ImageIcon digitalWalletLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/DigitalWallet.png"));
-       ImageIcon creditCardLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/CreditCard.png"));
-       ImageIcon bankLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/Bank.png"));
-       ImageIcon backArrowLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/backArrow.png"));
-       ImageIcon nextArrowLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/modelView/imagesResources/nextArrow.png"));
+       ImageIcon digitalWalletLogo = new ImageIcon(getClass().getResource("resources/digitalWallet.png"));
+       ImageIcon creditCardLogo = new ImageIcon(getClass().getResource("resources/creditCard.png"));
+       ImageIcon bankLogo = new ImageIcon(getClass().getResource("resources/bankLogo.png"));
+       ImageIcon backArrowLogo = new ImageIcon(getClass().getResource("resources/backArrow.png"));
+       ImageIcon nextArrowLogo = new ImageIcon(getClass().getResource("resources/nextArrow.jpg"));
        // Pulsanti con icone
        backButton.setIcon(backArrowLogo);
        backButton.setBackground(new Color(145, 186, 214));
