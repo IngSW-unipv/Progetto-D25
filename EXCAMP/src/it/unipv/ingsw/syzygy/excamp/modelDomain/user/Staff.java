@@ -109,7 +109,7 @@ public class Staff extends Persona {
 	
 	 public void visualizzaProgrammi() {
 		    // Inizializzi un'organizzazione programmi con una location fittizia o null se non serve
-		    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null, null, null);
+		    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null);
 
 		    // Carichi i programmi dal database
 		    organizzazioneProgrammi.caricaProgramma();

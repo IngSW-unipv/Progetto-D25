@@ -81,13 +81,13 @@ public class Utente extends Persona{
 	}
 	
 	public void visualizzaProgrammiGiornalieri() {
-	    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null, null, null);
+	    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null);
 	    organizzazioneProgrammi.caricaProgramma();
 	    organizzazioneProgrammi.visualizzaProgramma();
 	}
 
 	public void visualizzaProgrammiAlternativi() {
-	    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null, null, null);
+	    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null);
 	    organizzazioneProgrammi.caricaProgramma();
 	    organizzazioneProgrammi.visualizzaProgramma();
 	}

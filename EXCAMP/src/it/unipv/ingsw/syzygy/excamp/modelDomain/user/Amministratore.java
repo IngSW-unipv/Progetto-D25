@@ -78,35 +78,35 @@ public class Amministratore extends Persona {
     
 	
     public void caricaProgramma() {
-        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, new ProgrammaDAO(null));
         organizzazioneProgrammi.caricaProgramma();
     }
 
 
     public void salvaProgramma() {
-        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, new ProgrammaDAO(null));
         organizzazioneProgrammi.salvaProgramma();
     }
 
     public void pubblicaProgramma(ProgrammaGiornaliero programma) {
-        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, new ProgrammaDAO(null));
         organizzazioneProgrammi.aggiungiProgrammaGiornaliero(programma.getData(), programma);
     }
 
 
     public void pubblicaProgrammaAlternativo(ProgrammaAlternativo programma) {
-        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, new ProgrammaDAO(null));
         organizzazioneProgrammi.aggiungiProgrammaAlternativo(programma.getData(), programma);
     }
 
     public ProgrammaGiornaliero visualizzaProgramma(String data) {
-        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, new ProgrammaDAO(null));
         return organizzazioneProgrammi.getProgrammaGiornaliero(data);
     }
 
 
     public ProgrammaAlternativo visualizzaProgrammaAlternativo(String data) {
-        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, null, null, new ProgrammaDAO(null));
+        OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(location, new ProgrammaDAO(null));
         return organizzazioneProgrammi.getProgrammaAlternativo(data);
     }
 

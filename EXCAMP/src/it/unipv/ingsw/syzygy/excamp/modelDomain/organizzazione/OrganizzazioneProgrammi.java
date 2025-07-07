@@ -18,10 +18,8 @@ public class OrganizzazioneProgrammi extends Organizzazione {
 	
     private ProgrammaDAO programmaDAO;
 	   
-	public OrganizzazioneProgrammi(Location location, Location programmiGiornalieriPerLocationCamp, Location programmiAlternativiPerLocationCamp, ProgrammaDAO programmaDAO) {
+	public OrganizzazioneProgrammi(Location location, ProgrammaDAO programmaDAO) {
 		   super(location);
-	       this.programmiGiornalieriPerLocationCamp = new HashMap<>();
-	       this.programmiAlternativiPerLocationCamp = new HashMap<>();
 	       this.programmaDAO = programmaDAO;
 	   }
 	
@@ -104,10 +102,10 @@ public class OrganizzazioneProgrammi extends Organizzazione {
    @Override
    public void salvaProgramma() {
        try {
-           // Salva i programmi giornalieri nel database
-	   for (Map<Camp, ProgrammaAlternativo> locationCampMap : programmiAlternativiPerLocationCamp.values()) {
-		    for (ProgrammaAlternativo programma : locationCampMap.values()) {
-		        programmaDAO.salvaProgrammaAlternativo(programma);
+       // Salva i programmi giornalieri nel database
+	   for (Map<Camp, ProgrammaGiornaliero> locationCampMap : programmiGiornalieriPerLocationCamp.values()) {
+		    for (ProgrammaGiornaliero programma : locationCampMap.values()) {
+		        programmaDAO.salvaProgrammaGiornaliero(programma);
 		    }
 		}
        // Salva i programmi alternativi nel database
@@ -128,6 +126,11 @@ public class OrganizzazioneProgrammi extends Organizzazione {
        // Visualizza i programmi in base alla Location e al Camp selezionati
        for (Map<Camp, ProgrammaGiornaliero> locationCampMap : programmiGiornalieriPerLocationCamp.values()) {
            for (ProgrammaGiornaliero programma : locationCampMap.values()) {
+               System.out.println(programma);
+           }
+       }
+       for (Map<Camp, ProgrammaAlternativo> locationCampMap : programmiAlternativiPerLocationCamp.values()) {
+           for (ProgrammaAlternativo programma : locationCampMap.values()) {
                System.out.println(programma);
            }
        }
