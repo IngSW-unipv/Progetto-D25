@@ -1,5 +1,4 @@
 package it.unipv.ingsw.syzygy.excamp.modelDomain.user;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,7 +6,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import it.unipv.ingsw.syzygy.excamp.database.dao.StaffProfileDAO;
 import it.unipv.ingsw.syzygy.excamp.database.dao.organizzazione.TrasportoDAO;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountLockedException;
@@ -29,39 +27,48 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.OrganizzazionePro
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.ProgrammaAlternativo;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.ProgrammaGiornaliero;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.Trasporto;
-
 public class Staff extends Persona {
 	private String nameST;
 	private String surnameST;
 	private int ageST;
 	private String CFST;
-	private String accomodationST;
+	private String accommodationST;
+	private String residenceST;
 	private Departure pointOfDeparture;
+	private String destination;
+	private String idTR;
 	private Transportation transportation;
 	private String allergiesST;
 	private String medicalIssuesST;
 	private String phonenumberST;
+	private Camp camp;
 	private Menu menuPersonale;
 	
+	
 	public Staff(int id, String username, String password, String nameST,
-			String surnameST, int ageST,String CFST, String accomodationST,
-			Departure pointOfDeparture, Transportation transportation,
-			String allergiesST, String medicalIssuesST, String phonenumberST) {
+			String surnameST, int ageST,String CFST, String accomodationST, String residenceST,
+			Departure pointOfDeparture, String destination, String idTR, Transportation transportation,
+			String allergiesST, String medicalIssuesST, String phonenumberST, Camp camp) {
 		super(id, username, password);
-		// TODO Auto-generated constructor stub
+		
 		this.nameST = nameST;
 		this.surnameST = surnameST;
 		this.ageST = ageST;
 		this.CFST = CFST;
-		this.accomodationST = accomodationST;
+		this.accommodationST = accomodationST;
+		this.residenceST = residenceST;
 		this.pointOfDeparture = pointOfDeparture;
+		this.destination = destination;
+		this.idTR = idTR;
 		this.transportation = transportation;
 		this.allergiesST = allergiesST;
 		this.medicalIssuesST = medicalIssuesST;
 		this.phonenumberST = phonenumberST;
+		this.camp = camp;
 	
 	}
-		
+	
+	
 	 @Override
 	 public boolean login(LoginModel loginModel) throws AccountLockedException {
 	        try {
@@ -74,10 +81,14 @@ public class Staff extends Persona {
 	            return false;
 	        }
 	    }
-		 
+	
+	
+	
 	 public Menu scegliMenu(MenuController controller) {
 		    try {
 		        Menu menu = controller.creaMenuIniziale(getid(), null, getUsername(), getCFST());
+		        this.menuPersonale = menu;
+		        controller.salvaScelteStaff(getUsername(), getCFST(), menu.getPranzo(), menu.getCena());
 		        System.out.println("Menu selezionato correttamente:");
 		        menu.visualizzaMenu();
 		        return menu;
@@ -88,7 +99,6 @@ public class Staff extends Persona {
 		}
 	
 	 public void visualizzaMenu() {
-
 		    if (menuPersonale != null) {
 		        System.out.println("Il tuo menu selezionato:");
 		        menuPersonale.visualizzaMenu();
@@ -96,12 +106,12 @@ public class Staff extends Persona {
 		        System.out.println("Nessun menu selezionato. Scegli un menu prima di visualizzarlo.");
 		    }
 		}
- 
+	
 	 public void visualizzaAlloggiStaff() {
 	        OrganizzazioneAlloggi organizzazioneAlloggi = new OrganizzazioneAlloggi(null);
 			organizzazioneAlloggi.visualizzaAlloggiStaff(); // Usa un'istanza
-	    } 
-	 
+	    }
+	
 	 public void visualizzaAlloggiPartecipanti() {
 	        OrganizzazioneAlloggi organizzazioneAlloggi = new OrganizzazioneAlloggi(null);
 			organizzazioneAlloggi.visualizzaAlloggiPartecipanti(); // Usa un'istanza
@@ -110,26 +120,23 @@ public class Staff extends Persona {
 	 public void visualizzaProgrammi() {
 		    // Inizializzi un'organizzazione programmi con una location fittizia o null se non serve
 		    OrganizzazioneProgrammi organizzazioneProgrammi = new OrganizzazioneProgrammi(null, null);
-
 		    // Carichi i programmi dal database
 		    organizzazioneProgrammi.caricaProgramma();
-
 		    // Li visualizzi
 		    organizzazioneProgrammi.visualizzaProgramma();
 		}
-	 
+	
 	 public void visualizzaListaAutisti() {
 		    OrganizzazioneAutisti organizzazioneAutisti = new OrganizzazioneAutisti(null) ;
-
 		    ListaContattiAutisti lista = organizzazioneAutisti.getListaContattiAutisti();
 		    for (Autista autista : lista.getAutisti()) {
-		        System.out.println("Nome: " + autista.getNameAU() + 
-		                           ", Cognome: " + autista.getSurnameAU() + 
-		                           ", Telefono: " + autista.getPhoneNumberAU() + 
+		        System.out.println("Nome: " + autista.getNameAU() +
+		                           ", Cognome: " + autista.getSurnameAU() +
+		                           ", Telefono: " + autista.getPhoneNumberAU() +
 		                           ", Location: " + autista.getLocation());
 		    }
 		}
-
+	
 	 public List<Trasporto> getAllTrasporti(Connection connection) {
 	        try {
 	            TrasportoDAO trasportoDAO = new TrasportoDAO(connection);
@@ -139,7 +146,8 @@ public class Staff extends Persona {
 	            return new ArrayList<>();
 	        }
 	    }
-	 	 
+	
+	
 	 public void updateProfilePicture(String newImagePath, Connection connection) {
 	        try {
 	            StaffProfileDAO profileDAO = new StaffProfileDAO(connection);
@@ -160,7 +168,7 @@ public class Staff extends Persona {
 	            System.out.println("Errore: " + e.getMessage());
 	        }
 	    }
-	 
+	
 	 public void uploadExperience(String newExperience, Connection connection) {
 	        try {
 	            StaffProfileDAO profileDAO = new StaffProfileDAO(connection);
@@ -180,11 +188,10 @@ public class Staff extends Persona {
 	            System.out.println("Errore: " + e.getMessage());
 	        }
 	    }
- 
 	 public void photoUploadApp(File photo) {
 		    try {
 		        BachecaModel bachecaModel = new BachecaModel();
-		        bachecaModel.insertPhoto(photo); 
+		        bachecaModel.insertPhoto(photo);
 		        System.out.println("Foto caricata con successo nella bacheca.");
 		        bachecaModel.close();
 		    } catch (InvalidImageFormatException e) {
@@ -199,7 +206,7 @@ public class Staff extends Persona {
 		        System.out.println("Errore del database durante il caricamento della foto: " + e.getMessage());
 		    }
 		}
-	 
+	
 	 public void visualizzaProfiloStaff(Connection connection) {
 	        try {
 	            StaffProfileDAO profileDAO = new StaffProfileDAO(connection);
@@ -214,11 +221,14 @@ public class Staff extends Persona {
 	            System.out.println("Errore durante la visualizzazione del profilo: " + e.getMessage());
 	        }
 	    }
-	 
-	public String getPastoPranzo() {
-	    return getPastoPranzo();
-	    }
-
+	
+	 public String getPastoPranzo() {
+		    return (menuPersonale != null) ? menuPersonale.getPranzo() : null;
+		}
+	 public String getPastoCena() {
+		    return (menuPersonale != null) ? menuPersonale.getCena() : null;
+		}
+	
 	public String getNameST() {
 		return nameST;
 	}
@@ -231,12 +241,22 @@ public class Staff extends Persona {
 	public String getCFST() {
 		return CFST;
 	}
-	public String getAccomodationST() {
-		return accomodationST;
+	public String getAccommodationST() {
+		return accommodationST;
 	}
+	
+	public String getResidenceST() {
+		return residenceST;
+	}
+	
 	public Departure getPointOfDeparture() {
 		return pointOfDeparture;
 	}
+	
+	public String getDestination() {
+		return destination;
+	}
+	
 	public Transportation getTransportation() {
 		return transportation;
 	}
@@ -248,5 +268,17 @@ public class Staff extends Persona {
 	}
 	public String getPhoneNumberST() {
 		return phonenumberST;
+	}
+	public Camp getCamp() {
+		return camp;
+	}
+	public void setCamp(Camp camp) {
+		this.camp = camp;
+	}
+	public String getIdTR() {
+		return idTR;
+	}
+	public void setIdTR(String idTR) {
+		this.idTR = idTR;
 	}
 }

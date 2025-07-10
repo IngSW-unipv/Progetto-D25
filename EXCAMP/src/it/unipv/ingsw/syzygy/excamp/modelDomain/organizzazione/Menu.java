@@ -5,12 +5,13 @@ import java.util.List;
 import it.unipv.ingsw.syzygy.excamp.exceptions.MissingMenuChoiceException;
 import it.unipv.ingsw.syzygy.excamp.exceptions.SafeMenu;
 import it.unipv.ingsw.syzygy.excamp.modelController.organizzazione.MenuController;
+import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Camp;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Location;
 
   public class Menu extends Organizzazione {
-   String colazione = "BUFFET";
-   String pranzo;
-   String cena;
+   private String colazione = "BUFFET";
+   private String pranzo;
+   private String cena;
    
    public Menu(String pranzo, String cena, Location location) {
 	   super (location);
@@ -39,6 +40,25 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Location;
 	    }
 	}
 
+   
+	public String getPranzo() {
+		return pranzo;
+	}
+
+	public void setPranzo(String pranzo) {
+		this.pranzo = pranzo;
+	}
+
+
+	public String getCena() {
+		return cena;
+	}
+
+
+	public void setCena(String cena) {
+		this.cena = cena;
+	}
+   
    
    @Override
    public void caricaProgramma() {
@@ -84,3 +104,5 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Location;
 		return null;
 	}
 }
+
+
