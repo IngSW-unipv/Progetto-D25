@@ -18,7 +18,7 @@ drop table if exists PERSONA;
 CREATE TABLE if not exists PERSONA (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    pwd VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE if not exists AMMINISTRATORE (
