@@ -39,33 +39,33 @@ public class UpperBar extends JPanel{
        title.setFont(new Font("Berlin Sans FB", Font.PLAIN, 40));
        title.setForeground(Color.WHITE);
        // Logo (icona)
-       ImageIcon iconLogo = new ImageIcon(getClass().getResource("resources/Logo.png"));
+       ImageIcon iconLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/Logo.png"));
        JLabel logoLabel = new JLabel(iconLogo);
        logoLabel.setPreferredSize(new Dimension(60, 60));
        // Pulsante profilo
        profileButton = new JButton();
        profileButton.setBackground(new Color(213, 0, 109));
-       ImageIcon profileIcon = new ImageIcon(getClass().getResource("resources/defaultImage.png"));
+       ImageIcon profileIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/defaultImage.png"));
        profileButton.setIcon(new ImageIcon(profileIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
        // Pulsante contatti segreteria
        contattiSegreteriaButton = new JButton();
        contattiSegreteriaButton.setBackground(new Color(213, 0, 109));
-       ImageIcon contattiSegreteriaIcon = new ImageIcon(getClass().getResource("resources/segreteria.jpg"));
+       ImageIcon contattiSegreteriaIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/segreteria.jpg"));
        contattiSegreteriaButton.setIcon(new ImageIcon(contattiSegreteriaIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
        // Pulsante feedback
        feedbackButton = new JButton();
        feedbackButton.setBackground(new Color(213, 0, 109));
-       ImageIcon feedbackIcon = new ImageIcon(getClass().getResource("resources/feedback.jpg"));
+       ImageIcon feedbackIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/feedback.jpg"));
        feedbackButton.setIcon(new ImageIcon(feedbackIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
        // Pulsante organizzazione
        organizzazioneButton = new JButton();
        organizzazioneButton.setBackground(new Color(213, 0, 109));
-       ImageIcon organizzazioneIcon = new ImageIcon(getClass().getResource("resources/organizzazione.jpg"));
+       ImageIcon organizzazioneIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/organizzazione.jpg"));
        organizzazioneButton.setIcon(new ImageIcon(organizzazioneIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
        // Pulsante bacheca
        bachecaButton = new JButton();
        bachecaButton.setBackground(new Color(213, 0, 109));
-       ImageIcon bachecaIcon = new ImageIcon(getClass().getResource("resources/bacheca.png"));
+       ImageIcon bachecaIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/bacheca.png"));
        bachecaButton.setIcon(new ImageIcon(bachecaIcon.getImage().getScaledInstance(29, 25, Image.SCALE_SMOOTH)));
 
        JPanel spacer = new JPanel();

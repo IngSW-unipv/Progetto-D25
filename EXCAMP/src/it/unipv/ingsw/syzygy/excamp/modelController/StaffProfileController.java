@@ -39,7 +39,7 @@ public class StaffProfileController {
         if (staffProfile.getProfilePicturePath() != null && !staffProfile.getProfilePicturePath().isEmpty()) {
             profileView.getProfileImageLabel().setIcon(new ImageIcon(staffProfile.getProfilePicturePath()));
         } else {
-            profileView.getProfileImageLabel().setIcon(new ImageIcon("resources/defaultImage.png"));
+            profileView.getProfileImageLabel().setIcon(new ImageIcon("/it/unipv/ingsw/syzygy/excamp/resources/defaultImage.png"));
         }
     }
 

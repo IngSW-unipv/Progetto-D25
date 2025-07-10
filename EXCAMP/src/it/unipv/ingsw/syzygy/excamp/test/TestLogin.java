@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import it.unipv.ingsw.syzygy.excamp.modelView.LoginView;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class TestLogin {
 
     private LoginView loginView;
 
-    @BeforeClass
+    @Before
     public void setUp() {
         loginView = new LoginView();
     }

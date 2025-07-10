@@ -70,15 +70,15 @@ public class PaymentDataCCView extends JPanel {
            textField.setFont(font);
        }
        // Configure nextButton
-       ImageIcon nextArrowIcon = new ImageIcon(getClass().getResource("resources/nextArrow.jpg"));
+       ImageIcon nextArrowIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/nextArrow.jpg"));
        nextButton.setIcon(nextArrowIcon);
        nextButton.setBackground(new Color(145, 186, 214));
        // Configure backButton
-       ImageIcon backArrowIcon = new ImageIcon(getClass().getResource("resources/backArrow.png"));
+       ImageIcon backArrowIcon = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/backArrow.png"));
        backButton.setIcon(backArrowIcon);
        backButton.setBackground(new Color(145, 186, 214));
        // Logo for payment method
-       ImageIcon creditCardLogo = new ImageIcon(getClass().getResource("resources/creditCard.png"));
+       ImageIcon creditCardLogo = new ImageIcon(getClass().getResource("/it/unipv/ingsw/syzygy/excamp/resources/creditCard.png"));
        JLabel creditCardImage = new JLabel(creditCardLogo);
        // Create panel for data input
        JPanel dataInput = new JPanel(new GridBagLayout());
