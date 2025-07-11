@@ -2,22 +2,35 @@ package it.unipv.ingsw.syzygy.excamp.modelDomain;
 
 import java.sql.*;
 import it.unipv.ingsw.syzygy.excamp.exceptions.*;
+import it.unipv.ingsw.syzygy.excamp.modelDomain.user.Utente;
 
 public class LoginModel {
-  private int loginAttempts = 0;
+	private Utente loggedUser;
+	private int loginAttempts = 0;
   private Connection connection;
   public LoginModel(Connection connection) {
       this.connection = connection;
   }
+  
+  public void setLoggedUser(Utente user) {
+      this.loggedUser = user;
+  }
+
+  public Utente getLoggedUser() {
+      return this.loggedUser;
+  }
+  
   public void loginAmministratore(String username, String password) throws AccountNotFoundException, WrongPasswordException {
-      String query = "SELECT * FROM AMMINISTRATORE WHERE usernameAD = ?";
+      String query = "SELECT p.pwd FROM PERSONA p " +
+              "JOIN AMMINISTRATORE a ON p.id = a.persona_id " +
+              "WHERE p.username = ?";
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setString(1, username);
           ResultSet rs = stmt.executeQuery();
           if (!rs.next()) {
               throw new AccountNotFoundException();
           }
-          String dbPassword = rs.getString("passwordAD");
+          String dbPassword = rs.getString("pwd");
           if (!dbPassword.equals(password)) {
               throw new WrongPasswordException();
           }
@@ -26,7 +39,9 @@ public class LoginModel {
       }
   }
   public void loginStaff(String username, String password) throws AccountNotFoundException, WrongPasswordException {
-      String query = "SELECT * FROM STAFF WHERE usernameST = ?";
+      String query ="SELECT p.pwd, s.nameST, s.surnameST FROM PERSONA p " +
+              "JOIN STAFF s ON p.id = s.persona_id " +
+              "WHERE p.username = ?";
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setString(1, username);
           ResultSet rs = stmt.executeQuery();
@@ -40,7 +55,7 @@ public class LoginModel {
               // Autorizza il login e forza il cambio della password
           } else {
               // Se non è la prima volta, verifica la password
-              String dbPassword = rs.getString("passwordST");
+              String dbPassword = rs.getString("pwd");
               if (!dbPassword.equals(password)) {
                   throw new WrongPasswordException();
               }
@@ -50,7 +65,9 @@ public class LoginModel {
       }
   }
   public void loginUtente(String username, String password) throws AccountNotFoundException, WrongPasswordException, StayEndedException {
-      String query = "SELECT * FROM UTENTE WHERE username = ? AND password = ?";
+      String query = "SELECT p.pwd FROM PERSONA p " +
+              "JOIN UTENTE u ON p.id = u.persona_id " +
+              "WHERE p.username = ?";
       try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setString(1, username);
           stmt.setString(2, password);
