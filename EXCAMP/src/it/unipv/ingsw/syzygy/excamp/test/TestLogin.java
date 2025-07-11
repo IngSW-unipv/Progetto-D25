@@ -2,7 +2,9 @@ package it.unipv.ingsw.syzygy.excamp.test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.Test;
 
@@ -19,6 +21,8 @@ public class TestLogin {
    public void setUp() {
        loginView = new LoginView();
    }
+   
+
    @Test
    public void testComponentsAreNotNull() {
        assertNotNull(loginView.getLoginButton());
@@ -139,7 +143,8 @@ public class TestLogin {
    @Test
    public void testSetErrorLabel() {
        loginView.setErrorLabel("Errore di test");
-       JLabel errorLabel = (JLabel) loginView.getComponent(0).getComponentAt(0, 0);
+       JLabel errorLabel = loginView.getErrorLabel();
        assertTrue(errorLabel.isVisible());
+       assertEquals("Errore di test", errorLabel.getText());
    }
 }

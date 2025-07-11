@@ -22,7 +22,7 @@ public class LoginView extends JPanel {
    private JLabel passwordLabel;
    private JPasswordField passwordField;
    private JLabel signupLabel;
-   private JLabel errorLabel;
+   private JLabel errorLabel = new JLabel();
    private ButtonGroup accountTypeToggleGroup;
    public LoginView() {
        super();
@@ -146,6 +146,10 @@ public class LoginView extends JPanel {
    public JPasswordField getPassword() {
        return passwordField;
    }
+   
+   public JLabel getErrorLabel() {
+	    return errorLabel;
+	}
    public void setErrorLabel(String message) {
        errorLabel.setText(message);
        errorLabel.setVisible(true);
