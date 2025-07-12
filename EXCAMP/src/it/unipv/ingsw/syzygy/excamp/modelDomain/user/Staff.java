@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import it.unipv.ingsw.syzygy.excamp.database.dao.StaffProfileDAO;
@@ -84,7 +87,17 @@ public class Staff extends Persona {
 	
 	
 	
-	 public Menu scegliMenu(MenuController controller) {
+	 public Menu scegliMenu(MenuController controller, LocalDate dataDelMenu) {
+		  
+		// Controllo dell'orario limite
+		 LocalDateTime now = LocalDateTime.now();
+		 LocalDateTime scadenza = dataDelMenu.minusDays(1).atTime(LocalTime.of(21, 30));
+
+		    if (now.isAfter(scadenza)) {
+		        System.out.println("Errore: La selezione dei pasti è consentita solo entro le 21:30 del giorno precedente.");
+		        return null;
+		    }
+
 		    try {
 		        Menu menu = controller.creaMenuIniziale(getid(), null, getUsername(), getCFST());
 		        this.menuPersonale = menu;
@@ -97,6 +110,7 @@ public class Staff extends Persona {
 		        return null;
 		    }
 		}
+
 	
 	 public void visualizzaMenu() {
 		    if (menuPersonale != null) {

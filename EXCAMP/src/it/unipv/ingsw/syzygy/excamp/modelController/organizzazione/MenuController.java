@@ -55,6 +55,11 @@ public class MenuController {
 
 	        if ("MENU ALTERNATIVO".equalsIgnoreCase(pranzo) || "MENU ALTERNATIVO".equalsIgnoreCase(cena)) {
 	            throw new SafeMenu();
+	        }try {
+	            salvaScelteUtente(username, pranzo, cena);
+	            System.out.println("Scelte menu utente salvate nel database.");
+	        } catch (SQLException e) {
+	            System.out.println("Errore nel salvataggio delle scelte menu utente: " + e.getMessage());
 	        }
 	    }
 	    // Verifica se è uno staff (usando username e CF)

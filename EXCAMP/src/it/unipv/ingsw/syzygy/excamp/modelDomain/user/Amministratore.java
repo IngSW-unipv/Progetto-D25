@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import it.unipv.ingsw.syzygy.excamp.database.dao.organizzazione.ProgrammaDAO;
@@ -11,6 +14,7 @@ import it.unipv.ingsw.syzygy.excamp.database.dao.organizzazione.TrasportoDAO;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountLockedException;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountNotFoundException;
 import it.unipv.ingsw.syzygy.excamp.exceptions.WrongPasswordException;
+import it.unipv.ingsw.syzygy.excamp.modelController.organizzazione.MenuController;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.LoginModel;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.*;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.Albergo;
@@ -164,12 +168,24 @@ public class Amministratore extends Persona {
     }
 
 
-    public Menu creaMenu(String pranzo, String cena) {
-        // Controllo delle allergie
-        if (hasAllergy(pranzo)) pranzo = "MENU ALTERNATIVO";
-        if (hasAllergy(cena)) cena = "MENU ALTERNATIVO";
-        return new Menu(pranzo, cena, location);
+    public Menu creaMenu(MenuController controller, int personaId, String CFPA, String username, String CF, LocalDate dataDelMenu) {
+        // Controllo dell'orario limite
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime scadenza = dataDelMenu.minusDays(1).atTime(LocalTime.of(21, 0));
+        if (now.isAfter(scadenza)) {
+            System.out.println("Errore: il menu deve essere pubblicato entro le 21:00 del giorno precedente.");
+            return null;
+        }
+        Menu menu = new Menu("TEMP", "TEMP", location);
+        try {
+            menu.scegliMenu(controller, personaId, CFPA, username, CF); // Creazione menu
+            System.out.println("Menu creato correttamente per il giorno " + dataDelMenu);
+        } catch (Exception e) {
+            System.out.println("Errore nella creazione del menu: " + e.getMessage());
+        }
+        return menu;
     }
+
 
     // Controlla se l'utente ha allergia per un determinato cibo
     public boolean hasAllergy(String food) {
