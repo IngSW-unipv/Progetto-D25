@@ -119,7 +119,7 @@ public class RegistrationFormController {
    }
    // Verifica se l'email è valida
    private boolean isValidEmail(String username) {
-       return username != null && username.contains("@") && username.contains(".");
+       return username != null && username.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
    }
    // Verifica se le email coincidono
    private boolean emailConfirmed(String username, String confirmUsername) {
