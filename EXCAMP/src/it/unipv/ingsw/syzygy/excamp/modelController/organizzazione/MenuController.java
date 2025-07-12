@@ -28,7 +28,7 @@ public class MenuController {
        this.staffDAO = staffDAO;
    }
    // Metodo per creare un menù iniziale uguale per tutti gli utenti e lo staff
-   public Menu creaMenuIniziale(int personaId, String CFPA, String username, String CF) throws SafeMenu, MissingMenuChoiceException {
+   public Menu creaMenuIniziale(int personaId, String CFPA, String username, String CFST) throws SafeMenu, MissingMenuChoiceException {
 	    // Recupera tutti i pasti dal database
 	    List<String> pasti = pastiDAO.getAllPasti();
 
@@ -63,7 +63,7 @@ public class MenuController {
 	        }
 	    }
 	    // Verifica se è uno staff (usando username e CF)
-	    else if (isStaff(username, CF)) {
+	    else if (isStaff(username, CFST)) {
 	        List<String> pranzoOpzioniStaff = getStaffMenu(pasti);
 	        List<String> cenaOpzioniStaff = getStaffMenu(pasti);
 
@@ -124,8 +124,8 @@ public class MenuController {
 	    return utente != null;
 	}
    // Verifica se uno staff è presente nel sistema
-   private boolean isStaff(String username, String CF) {
-       Staff staff = staffDAO.getStaff(username, CF);
+   private boolean isStaff(String username, String CFST) {
+       Staff staff = staffDAO.getStaff(username, CFST);
        return staff != null;
    }
 

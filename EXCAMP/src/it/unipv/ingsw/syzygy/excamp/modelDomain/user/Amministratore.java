@@ -168,7 +168,7 @@ public class Amministratore extends Persona {
     }
 
 
-    public Menu creaMenu(MenuController controller, int personaId, String CFPA, String username, String CF, LocalDate dataDelMenu) {
+    public Menu creaMenu(MenuController controller, int personaId, String CFPA, String username, String CFST, LocalDate dataDelMenu) {
         // Controllo dell'orario limite
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime scadenza = dataDelMenu.minusDays(1).atTime(LocalTime.of(21, 0));
@@ -178,7 +178,7 @@ public class Amministratore extends Persona {
         }
         Menu menu = new Menu("TEMP", "TEMP", location);
         try {
-            menu.scegliMenu(controller, personaId, CFPA, username, CF); // Creazione menu
+            menu.scegliMenu(controller, personaId, CFPA, username, CFST); // Creazione menu
             System.out.println("Menu creato correttamente per il giorno " + dataDelMenu);
         } catch (Exception e) {
             System.out.println("Errore nella creazione del menu: " + e.getMessage());

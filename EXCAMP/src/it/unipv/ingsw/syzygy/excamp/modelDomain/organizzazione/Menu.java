@@ -27,9 +27,9 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.Location;
    }
   
    @Override
-   public void scegliMenu(MenuController controller, int personaId, String CFPA, String username, String CF) {
+   public void scegliMenu(MenuController controller, int personaId, String CFPA, String username, String CFST) {
 	    try {
-	        Menu nuovoMenu = controller.creaMenuIniziale(personaId, CFPA, username, CF);
+	        Menu nuovoMenu = controller.creaMenuIniziale(personaId, CFPA, username, CFST);
 	        this.pranzo = nuovoMenu.pranzo;
 	        this.cena = nuovoMenu.cena;
 	        System.out.println("Menu scelto con successo!");
