@@ -18,13 +18,13 @@ public class FeedbackFormDAO {
 					"transportation, comments) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement pstmt = connection.prepareStatement(query)) {
 			pstmt.setInt(1, feedback.getUserId());
-			pstmt.setInt(1, feedback.getStelle());
-			pstmt.setString(2, feedback.getAttivitaLiked());
-			pstmt.setString(3, feedback.getAttivitaDisliked());
-			pstmt.setInt(4, feedback.getVotoMenu());
-			pstmt.setInt(5, feedback.getVotoAlloggio());
-			pstmt.setInt(6, feedback.getVotoTrasporti());
-			pstmt.setString(7, feedback.getCommenti());
+			pstmt.setInt(2, feedback.getStelle());
+			pstmt.setString(3, feedback.getAttivitaLiked());
+			pstmt.setString(4, feedback.getAttivitaDisliked());
+			pstmt.setInt(5, feedback.getVotoMenu());
+			pstmt.setInt(6, feedback.getVotoAlloggio());
+			pstmt.setInt(7, feedback.getVotoTrasporti());
+			pstmt.setString(8, feedback.getCommenti());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
