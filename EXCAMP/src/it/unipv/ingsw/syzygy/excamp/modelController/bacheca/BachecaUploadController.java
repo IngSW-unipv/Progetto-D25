@@ -1,12 +1,13 @@
 package it.unipv.ingsw.syzygy.excamp.modelController.bacheca;
 
+import it.unipv.ingsw.syzygy.excamp.exceptions.FileExceededException;
+import it.unipv.ingsw.syzygy.excamp.exceptions.InvalidImageFormatException;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.BachecaModel;
 import it.unipv.ingsw.syzygy.excamp.modelView.bacheca.BachecaUploadView;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 import java.sql.*;
-import java.util.Calendar;
 
 public class BachecaUploadController {
 	private BachecaUploadView view;
@@ -19,21 +20,13 @@ public class BachecaUploadController {
 		this.view.addUploadButtonActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					uploadPhoto();
-					}catch (SQLException e1) {
-					    view.showUploadError("Errore nel database: " + e1.getMessage());
-					    e1.printStackTrace();  
-					} catch (IOException e1) {
-					    view.showUploadError("Errore durante il caricamento del file: " + e1.getMessage());
-					    e1.printStackTrace();
-					}
+				uploadPhoto();
 
 			}
 		});
 	}
 	
-	private void uploadPhoto() throws SQLException, IOException {
+	private void uploadPhoto() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Seleziona la foto da caricare");
 		int result = fileChooser.showOpenDialog(view);
@@ -42,8 +35,13 @@ public class BachecaUploadController {
 			try {
 				String albumDirectory = model.insertPhoto(selectedFile);
 				view.showUploadSuccess(albumDirectory);
-			} catch (Exception ex) {
-				view.showUploadError("Errore" + ex.getMessage());
+			} catch (InvalidImageFormatException ex) {
+				view.showUploadError("Formato immagine non valido. Solo JPG, JPEG e PNG sono supportati.");
+			} catch (FileExceededException ex) {
+				view.showUploadError("Il file è troppo grande. Dimensione massima: 10 MB.");
+			} catch (SQLException | IOException ex) {
+				view.showUploadError("Errore durante il caricamento: " + ex.getMessage());
+				ex.printStackTrace();
 			}
 		}
 	}
