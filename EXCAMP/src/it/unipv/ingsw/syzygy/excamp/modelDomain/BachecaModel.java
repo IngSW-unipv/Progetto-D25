@@ -16,7 +16,7 @@ public class BachecaModel {
 		dao = new BachecaDAO();
 	}
 	
-	public void insertPhoto(File photo) throws SQLException, FileNotFoundException, IOException,
+	public String insertPhoto(File photo) throws SQLException, FileNotFoundException, IOException,
 	InvalidImageFormatException, FileExceededException {
 		if (!isValidImageFormat(photo)) {
 			throw new InvalidImageFormatException();
@@ -41,6 +41,8 @@ public class BachecaModel {
 		copyFile(photo, destinationFile);
 		
 		dao.insertPhoto(destinationFile.getAbsolutePath(), dateTaken, albumPath);
+		
+		return albumPath;
 	}
 	
 	private boolean isValidImageFormat(File photo) {

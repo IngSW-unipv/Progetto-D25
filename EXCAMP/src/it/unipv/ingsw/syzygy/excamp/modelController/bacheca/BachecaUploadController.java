@@ -40,47 +40,10 @@ public class BachecaUploadController {
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
 			try {
-				model.insertPhoto(selectedFile);
-				String albumDirectory = organizePhoto(selectedFile);
+				String albumDirectory = model.insertPhoto(selectedFile);
 				view.showUploadSuccess(albumDirectory);
 			} catch (Exception ex) {
 				view.showUploadError("Errore" + ex.getMessage());
-			}
-		}
-	}
-	
-	private String organizePhoto(File selectedFile) throws FileNotFoundException, IOException {
-	    Calendar calendar = Calendar.getInstance();
-	    calendar.setTimeInMillis(selectedFile.lastModified());
-	    int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
-	    int year = calendar.get(Calendar.YEAR);
-	    
-	    String albumPath = "photos/" + year + "/Week_" + weekOfYear;
-	    File albumDirectory = new File(albumPath);
-	    if (!albumDirectory.exists()) {
-	        albumDirectory.mkdirs();
-	    }
-	    
-	    File destination = new File(albumDirectory, selectedFile.getName());
-	    if (destination.exists()) {
-	        // Genera un nome unico per evitare la sovrascrittura
-	        String newName = System.currentTimeMillis() + "_" + selectedFile.getName();
-	        destination = new File(albumDirectory, newName);
-	    }
-	    
-	    copyFile(selectedFile, destination);
-	    return albumPath;
-	}
-
-	
-	
-	private void copyFile(File source, File destination) throws FileNotFoundException, IOException {
-		try (InputStream in = new FileInputStream(source);
-			 OutputStream out = new FileOutputStream(destination)) {
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = in.read(buffer)) > 0) {
-				out.write(buffer, 0, length);
 			}
 		}
 	}
