@@ -1,6 +1,8 @@
 package it.unipv.ingsw.syzygy.excamp.database.dao;
 
 import it.unipv.ingsw.syzygy.excamp.database.MySQLConnection;
+
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +14,14 @@ public class BachecaDAO {
 		connection = MySQLConnection.getConnection();
 	}
 	
-	public void insertPhoto(String filePath, String dateTaken, String albumPath) throws SQLException {
-		String query = "INSERT INTO bacheca (file_path, dateTaken, album) " +
+	public void insertPhoto(InputStream imageData, String filePath, String dateTaken, String albumPath) throws SQLException {
+		String query = "INSERT INTO bacheca (image, file_path, dateTaken, album) " +
 				"VALUES (?, ?, ?)";
 		try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-			pstmt.setString(1, filePath);
-			pstmt.setString(2, dateTaken);
-			pstmt.setString(3, albumPath);
+			pstmt.setBlob(1, imageData);
+			pstmt.setString(2, filePath);
+			pstmt.setString(3, dateTaken);
+			pstmt.setString(4, albumPath);
 			
 			pstmt.executeUpdate();
 		}

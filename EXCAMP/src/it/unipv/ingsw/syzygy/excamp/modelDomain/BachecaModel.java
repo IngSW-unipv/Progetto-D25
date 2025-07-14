@@ -18,6 +18,10 @@ public class BachecaModel {
 	
 	public String insertPhoto(File photo) throws SQLException, FileNotFoundException, IOException,
 	InvalidImageFormatException, FileExceededException {
+		if (!photo.exists()) {
+			throw new FileNotFoundException("Il file non esiste: " + photo.getAbsolutePath());
+		}
+		
 		if (!isValidImageFormat(photo)) {
 			throw new InvalidImageFormatException();
 		}
@@ -40,7 +44,9 @@ public class BachecaModel {
 		File destinationFile = getUniqueFileName(albumDirectory, photo.getName());
 		copyFile(photo, destinationFile);
 		
-		dao.insertPhoto(destinationFile.getAbsolutePath(), dateTaken, albumPath);
+		try (InputStream imageData = new FileInputStream(photo)) {
+			dao.insertPhoto(imageData, destinationFile.getAbsolutePath(), dateTaken, albumPath);
+		}
 		
 		return albumPath;
 	}
