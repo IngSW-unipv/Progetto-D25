@@ -2,6 +2,8 @@ package it.unipv.ingsw.syzygy.excamp.database.dao;
 
 import it.unipv.ingsw.syzygy.excamp.database.MySQLConnection;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BachecaDAO {
 	private Connection connection;
@@ -28,6 +30,20 @@ public class BachecaDAO {
 		try (Statement stmt = connection.createStatement()) {
 	        return stmt.executeQuery(query);
 	    }
+	}
+	
+	public List<String> getAllWeeks() throws SQLException {
+		String query ="SELECT DISTINCT album FROM bacheca ORDER BY album";
+		List<String> weeks = new ArrayList<>();
+		
+		try (Statement stmt = connection.createStatement(); 
+				ResultSet rs =stmt.executeQuery(query)) {
+			while (rs.next()) {
+				String album = rs.getString("album");
+				weeks.add(album);
+			}
+		}
+		return weeks;
 	}
 	
 	public void closeConnection() throws SQLException {

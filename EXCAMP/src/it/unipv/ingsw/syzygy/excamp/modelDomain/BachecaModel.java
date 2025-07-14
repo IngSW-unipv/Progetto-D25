@@ -81,6 +81,10 @@ public class BachecaModel {
 		return dao.getAllPhotos();
 	}
 	
+	public List<String> getAllWeeks() throws SQLException {
+		return dao.getAllWeeks();
+	}
+	
 	public void close() throws SQLException {
 		dao.closeConnection();
 	}

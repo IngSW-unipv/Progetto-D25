@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.sql.*;
+import java.util.List;
 
 public class BachecaView extends JFrame{
 	private JList<String> albumList;
@@ -29,7 +30,7 @@ public class BachecaView extends JFrame{
 		return albumList.getSelectedValue();
 	}
 	
-	public void displayPhotos(java.util.List<String> photoPaths) {
+	public void displayPhotos(List<String> photoPaths) {
 		photoPanel.removeAll();
 		for (String path : photoPaths) {
 			ImageIcon thumbnail = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
@@ -40,10 +41,19 @@ public class BachecaView extends JFrame{
 		repaint();
 	}
 	
+	public void setAlbumList(List<String> albums) {
+		DefaultListModel<String> model = new DefaultListModel<>();
+		for (String album : albums) {
+			model.addElement(album);
+		}
+		albumList.setModel(model);
+	}
+	
 	public void showErrorMessage(String message) {
 		JOptionPane.showMessageDialog(this, message, "Errore", JOptionPane.ERROR_MESSAGE);
 	}
 	public void addAlbumSelectionListener(ListSelectionListener listSelectionListener) {
 		albumList.addListSelectionListener(listSelectionListener);
 	}
+
 }

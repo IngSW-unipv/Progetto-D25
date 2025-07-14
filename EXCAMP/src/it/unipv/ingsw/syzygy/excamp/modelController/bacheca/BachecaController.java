@@ -19,6 +19,13 @@ public class BachecaController {
 	
 	public BachecaController(BachecaView view, BachecaModel model) {
 		this.view = view;
+		try {
+			List<String> allWeeks = model.getAllWeeks();
+			view.setAlbumList(allWeeks);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			view.showErrorMessage("Errore durante il caricamento delle settimane: " + e.getMessage());
+		}
 		this.model = model;
 		
 		this.view.addAlbumSelectionListener(new ListSelectionListener() {
