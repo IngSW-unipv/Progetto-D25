@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="resources/Logo.png" width="200" alt="Logo">
+  <img src="EXCAMP/src/it/unipv/ingsw/syzygy/excamp/resources/Logo.png" width="90" alt="Logo">
   <h1>Experience Summer Camp - Progetto D25</h1>
 </div>
 
