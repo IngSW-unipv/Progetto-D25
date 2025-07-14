@@ -2,6 +2,7 @@ package it.unipv.ingsw.syzygy.excamp.modelController.organizzazione;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import java.util.List;
 
@@ -69,6 +70,12 @@ public class MenuController {
 
 	        pranzo = String.join(" / ", pranzoOpzioniStaff);
 	        cena = String.join(" / ", cenaOpzioniStaff);
+	        try {
+	            salvaPrimeScelteStaff(username, CFST, pranzo, cena);
+	            System.out.println("Scelte (prima fase) menu staff salvate nel database.");
+	        } catch (SQLException e) {
+	            System.out.println("Errore nel salvataggio delle scelte (prima fase) menu staff: " + e.getMessage());
+	        }
 	    }
 
 	    Location location = null;
@@ -96,22 +103,48 @@ public class MenuController {
 	    utenteDAO.salvaScelteUtente(username, pastoPranzo, pastoCena);
 	}
    
+   public void salvaPrimeScelteStaff(String username, String CFST, String pastoPranzo, String pastoCena) throws SQLException {
+	    staffDAO.aggiornaPastiStaff(username, CFST, pastoPranzo, pastoCena);
+	}
+   
    // Salva la scelta finale dello staff per il pranzo e la cena
    public void salvaScelteStaff(String usernameST, String CFST, String pastoPranzo, String pastoCena) throws MissingMenuChoiceException {
        // Verifica se pranzo e cena sono selezionati
-       if (pastoPranzo == null || pastoPranzo.isEmpty()) {
+	   String[] pasti = staffDAO.getPastiStaff(usernameST, CFST);
+	    if (pasti == null || pasti.length < 2) {
+	        throw new MissingMenuChoiceException();  
+	    }
+
+	    pastoPranzo = pasti[0];
+	    pastoCena = pasti[1];
+	   
+	   if (pastoPranzo == null || pastoPranzo.isEmpty()) {
            throw new MissingMenuChoiceException(); 
        }
        if (pastoCena == null || pastoCena.isEmpty()) {
            throw new MissingMenuChoiceException(); 
        }
-       // Salva le scelte dello staff
+       
+       String[] pranzoArray = pastoPranzo.split("\\s*/\\s*");
+       String[] cenaArray = pastoCena.split("\\s*/\\s*");
+       
        this.pranzoOpzioniStaff = new ArrayList<>();
-       this.pranzoOpzioniStaff.add(pastoPranzo); 
+       for (String opzione : pranzoArray) {
+           this.pranzoOpzioniStaff.add(opzione.trim());
+       }
+
        this.cenaOpzioniStaff = new ArrayList<>();
-       this.cenaOpzioniStaff.add(pastoCena);     
+       for (String opzione : cenaArray) {
+           this.cenaOpzioniStaff.add(opzione.trim());
+       }
+       
+       Random random = new Random();
+       String pranzo = this.pranzoOpzioniStaff.get(random.nextInt(this.pranzoOpzioniStaff.size()));
+       String cena = this.cenaOpzioniStaff.get(random.nextInt(this.cenaOpzioniStaff.size()));
+       // Salva le scelte dello staff
+           
        // Aggiorna il database con le scelte dello staff usando il metodo della classe StaffDAO
-       boolean success = staffDAO.aggiornaPastiStaff(usernameST, CFST, pastoPranzo, pastoCena);  
+       boolean success = staffDAO.aggiornaPastiStaff(usernameST, CFST, pranzo, cena);  
        if (success) {
            System.out.println("Scelte pasti aggiornate con successo!");
        } else {

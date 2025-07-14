@@ -212,4 +212,29 @@ public class StaffDAO {
        return false;
    }
    }
+   
+   public String[] getPastiStaff(String usernameST, String CFST) {
+	    String query = "SELECT pastoPranzo, pastoCena " +
+	                   "FROM STAFF " +
+	                   "WHERE CFST = ? AND persona_id = (SELECT id FROM PERSONA WHERE username = ?)";
+
+	    try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+	        pstmt.setString(1, CFST);
+	        pstmt.setString(2, usernameST);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            if (rs.next()) {
+	                String pranzo = rs.getString("pastoPranzo");
+	                String cena = rs.getString("pastoCena");
+	                return new String[] { pranzo, cena };
+	            } else {
+	                return null; // Nessun risultato trovato
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
 }
