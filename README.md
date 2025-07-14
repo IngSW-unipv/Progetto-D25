@@ -15,11 +15,16 @@ Il software per funzionare necessita l'installazione delle seguenti librerie:
 - [JUnit ]
 - [MySQL java connector](https://github.com/mysql/mysql-connector-j)
 
-## Setup iniziale 
+## Setup iniziale:
 Per quanto riguarda il database MySQL:
 1. Aprire MySQL Workbench e creare un'istanza in locale del database
 2. Importare i file ExcampDB e ExcampPopolamento
 3. Creare un profilo di accesso al database e concedergli le corrette autorizzazioni
+
+Setup Proetto:
+1. Clonare il progetto
+2. Sulla IDE Eclipse importare il file selezionando Git>Project from Git
+3. Incollare l’URL della repository nel campo URI 
 
 ## Documentazione
 E' consigliato prendere visione di tutta la documentazione presente su GitHub prima di eseguire il software.
