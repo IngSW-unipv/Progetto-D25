@@ -14,7 +14,9 @@ import it.unipv.ingsw.syzygy.excamp.database.dao.organizzazione.TrasportoDAO;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountLockedException;
 import it.unipv.ingsw.syzygy.excamp.exceptions.AccountNotFoundException;
 import it.unipv.ingsw.syzygy.excamp.exceptions.WrongPasswordException;
+import it.unipv.ingsw.syzygy.excamp.modelController.bacheca.BachecaController;
 import it.unipv.ingsw.syzygy.excamp.modelController.organizzazione.MenuController;
+import it.unipv.ingsw.syzygy.excamp.modelDomain.BachecaModel;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.LoginModel;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.lista.*;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.Albergo;
@@ -27,6 +29,7 @@ import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.OrganizzazionePro
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.ProgrammaAlternativo;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.ProgrammaGiornaliero;
 import it.unipv.ingsw.syzygy.excamp.modelDomain.organizzazione.Trasporto;
+import it.unipv.ingsw.syzygy.excamp.modelView.bacheca.BachecaView;
 
 public class Amministratore extends Persona {
 	private Location location;
@@ -195,9 +198,18 @@ public class Amministratore extends Persona {
                       
         return false;
     }
-
     
-    
+    public void visualizzaBacheca() {
+    	try {
+    		BachecaModel model = new BachecaModel();
+    		BachecaView view = new BachecaView();
+    		BachecaController controller = new BachecaController(view, model);
+    		view.setVisible(true);
+    	} catch (Exception e) {
+    		System.out.println("Errore durante la visualizzazione della bacheca: " + e.getMessage());
+    		e.printStackTrace();
+    	}
+    }
 }
 
 
